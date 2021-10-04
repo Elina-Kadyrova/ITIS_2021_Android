@@ -7,12 +7,363 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/num_publications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="974"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/num_followers"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+        app:layout_constraintTop_toTopOf="@id/iv_avatar" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/iv_avatar"
+        android:layout_width="117dp"
+        android:layout_height="117dp"
+        android:layout_marginTop="25dp"
+        android:paddingHorizontal="5dp"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        android:src="@drawable/photo_avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/users_name" />
+
+    <TextView
+        android:id="@+id/users_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="20dp"
+        android:text="kad_elina"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@drawable/divider"
+        android:layout_marginVertical="10dp"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="587dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:scaleType="centerCrop"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginHorizontal="2dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:src="@drawable/photo_tape3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:scaleType="centerCrop"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginHorizontal="2dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        android:src="@drawable/photo_tape2"/>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:scaleType="centerCrop"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginHorizontal="2dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        android:src="@drawable/photo_tape1" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Редакти..."
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        style="@style/RoundedButton"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Location" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Рекламн..."
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        style="@style/RoundedButton"
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/Location" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Статисти..."
+        android:textColor="@color/black"
+        style="@style/RoundedButton"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="@+id/button2" />
+
+    <TextView
+        android:id="@+id/num_followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1892"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/num_subscription"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/num_publications"
+        app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+
+    <TextView
+        android:id="@+id/num_subscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="574"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/num_followers"
+        app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="ELINA KADYROVA Model, Kazan"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+
+    <TextView
+        android:id="@+id/users_personality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="Модель"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginVertical="20dp"
+        android:src="@drawable/highlights1"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginVertical="20dp"
+        android:src="@drawable/highlights2"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView_1"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginVertical="20dp"
+        android:src="@drawable/highlights3"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView_2"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginVertical="20dp"
+        android:src="@drawable/highlights4"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView_3"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/users_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="-the soul full of sunshine KFU ITIS 8 лет в моделинге"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/users_personality" />
+
+    <TextView
+        android:id="@+id/Location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="Kazan,Tatarstan"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/users_description" />
+
+    <TextView
+        android:id="@+id/tv_publications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Публикации"
+        app:layout_constraintEnd_toEndOf="@+id/num_publications"
+        app:layout_constraintStart_toStartOf="@+id/num_publications"
+        app:layout_constraintTop_toBottomOf="@+id/num_publications" />
+
+    <TextView
+        android:id="@+id/tv_followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Подписчики"
+        app:layout_constraintEnd_toEndOf="@+id/num_followers"
+        app:layout_constraintStart_toStartOf="@+id/num_followers"
+        app:layout_constraintTop_toBottomOf="@+id/num_followers" />
+
+    <TextView
+        android:id="@+id/tv_subscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Подписки"
+        app:layout_constraintEnd_toEndOf="@+id/num_subscription"
+        app:layout_constraintStart_toStartOf="@+id/num_subscription"
+        app:layout_constraintTop_toBottomOf="@+id/num_subscription" />
+
+    <TextView
+        android:id="@+id/tv_highlights_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="art"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_1"
+        app:layout_constraintStart_toStartOf="@+id/imageView_1"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_1" />
+
+    <TextView
+        android:id="@+id/tv_highlights_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="details"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_2"
+        app:layout_constraintStart_toStartOf="@+id/imageView_2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_2" />
+
+    <TextView
+        android:id="@+id/tv_highligts_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="me myself a..."
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_3"
+        app:layout_constraintStart_toStartOf="@+id/imageView_3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_3" />
+
+    <TextView
+        android:id="@+id/tv_highlights_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="nails"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_4"
+        app:layout_constraintStart_toStartOf="@+id/imageView_4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_4" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_grid_on"
+        tools:layout_editor_absoluteY="553dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_reels"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="553dp" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_igtv"
+        tools:layout_editor_absoluteX="240dp"
+        tools:layout_editor_absoluteY="553dp" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_marks"
+        tools:layout_editor_absoluteY="553dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
