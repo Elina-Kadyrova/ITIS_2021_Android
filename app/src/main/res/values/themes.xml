@@ -16,7 +16,7 @@
 
     <style name="RoundedButton">
         <!-- active thumb & track color -->
-        <item name="background">@drawable/btn_stroke</item>
+        <item name="background">@drawable/navbar_white</item>
     </style>
 
 </resources>

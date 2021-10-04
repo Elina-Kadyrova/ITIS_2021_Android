@@ -18,14 +18,15 @@
         app:layout_constraintEnd_toStartOf="@+id/num_followers"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
-        app:layout_constraintTop_toTopOf="@id/iv_avatar" />
+        app:layout_constraintTop_toTopOf="@id/iv_avatar"
+        />
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/iv_avatar"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
-        android:paddingHorizontal="15dp"
         android:src="@drawable/photo_avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/users_name" />
@@ -97,45 +98,54 @@
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
-    <Button
-        android:id="@+id/button"
-        style="@style/RoundedButton"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@id/button"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
-        android:text="Редакти..."
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Редактировать"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Location" />
+        app:layout_constraintTop_toBottomOf="@+id/Location"
+        app:strokeColor="@color/grey_200"
+        app:strokeWidth="1dp" />
 
-    <Button
-        android:id="@+id/button2"
-        style="@style/RoundedButton"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@id/button2"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
-        android:text="Рекламн..."
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Рекламные интрументы"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/button3"
         app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/Location" />
+        app:layout_constraintTop_toBottomOf="@+id/Location"
+        app:strokeColor="@color/grey_200"
+        app:strokeWidth="1dp" />
 
-    <Button
-        android:id="@+id/button3"
-        style="@style/RoundedButton"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@id/button3"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
-        android:text="Статисти..."
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Статистика"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="@+id/button2" />
+        app:layout_constraintTop_toTopOf="@+id/button2"
+        app:strokeColor="@color/grey_200"
+        app:strokeWidth="1dp" />
 
     <TextView
         android:id="@+id/num_followers"
@@ -257,6 +267,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/users_personality" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:hint="Введите информацию о себе"
+        android:maxLength="150"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/users_description" />
+
     <TextView
         android:id="@+id/Location"
         android:layout_width="match_parent"
@@ -273,11 +296,11 @@
         android:id="@+id/tv_publications"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="Публикации"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:ellipsize="end"
-        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="@+id/num_publications"
         app:layout_constraintStart_toStartOf="@+id/num_publications"
         app:layout_constraintTop_toBottomOf="@+id/num_publications" />
@@ -286,11 +309,11 @@
         android:id="@+id/tv_followers"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="Подписчики"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:ellipsize="end"
-        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="@+id/num_followers"
         app:layout_constraintStart_toStartOf="@+id/num_followers"
         app:layout_constraintTop_toBottomOf="@+id/num_followers" />
@@ -299,11 +322,11 @@
         android:id="@+id/tv_subscription"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="Подписки"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:ellipsize="end"
-        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="@+id/num_subscription"
         app:layout_constraintStart_toStartOf="@+id/num_subscription"
         app:layout_constraintTop_toBottomOf="@+id/num_subscription" />
@@ -382,66 +405,135 @@
         app:layout_constraintTop_toTopOf="@+id/users_name"
         app:srcCompat="@drawable/ic_arrow_down" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:id="@+id/iv_tape"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="5dp"
+        android:src="@drawable/ic_grid_on"
         app:layout_constraintEnd_toStartOf="@+id/iv_reels"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_highlights_1"
-        android:layout_marginTop="10dp"
-        android:paddingVertical="5dp"
-        android:paddingHorizontal="40dp"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        android:src="@drawable/ic_grid_on" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_highlights_1" />
 
     <ImageView
         android:id="@+id/iv_reels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="5dp"
+        android:src="@drawable/ic_reels"
         app:layout_constraintEnd_toStartOf="@+id/iv_igtv"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/iv_tape"
-        app:layout_constraintTop_toTopOf="@id/iv_tape"
-        android:paddingVertical="5dp"
-        android:paddingHorizontal="40dp"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        android:src="@drawable/ic_reels" />
+        app:layout_constraintStart_toEndOf="@+id/iv_tape"
+        app:layout_constraintTop_toTopOf="@id/iv_tape" />
 
     <ImageView
         android:id="@+id/iv_igtv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="5dp"
+        android:src="@drawable/ic_igtv"
         app:layout_constraintEnd_toStartOf="@+id/iv_marks"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/iv_reels"
-        app:layout_constraintTop_toTopOf="@id/iv_tape"
-        android:paddingVertical="5dp"
-        android:paddingHorizontal="40dp"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        android:src="@drawable/ic_igtv" />
+        app:layout_constraintStart_toEndOf="@+id/iv_reels"
+        app:layout_constraintTop_toTopOf="@id/iv_tape" />
 
     <ImageView
         android:id="@+id/iv_marks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/iv_igtv"
-        app:layout_constraintTop_toTopOf="@id/iv_tape"
         android:paddingHorizontal="40dp"
         android:paddingVertical="5dp"
+        android:src="@drawable/ic_marks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        android:src="@drawable/ic_marks" />
+        app:layout_constraintStart_toEndOf="@+id/iv_igtv"
+        app:layout_constraintTop_toTopOf="@id/iv_tape" />
 
+    <ImageButton
+        android:id="@+id/btn_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/users_description"
+        app:layout_constraintEnd_toEndOf="@+id/users_description"
+        app:srcCompat="@drawable/ic_edit_text" />
+
+    <ImageView
+        android:id="@+id/nav_white"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/navbar_white" />
+
+    <ImageView
+        android:id="@+id/ic_home"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ic_search"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_home_tape" />
+
+    <ImageView
+        android:id="@+id/ic_search"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ic_reels"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ic_home"
+        app:srcCompat="@drawable/ic_search" />
+
+    <ImageView
+        android:id="@+id/ic_likes"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/menu_account"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ic_reels"
+        app:srcCompat="@drawable/ic_likes" />
+
+    <ImageView
+        android:id="@+id/ic_reels"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ic_likes"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ic_search"
+        app:srcCompat="@drawable/ic_reels_menu" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/menu_account"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginVertical="10dp"
+        android:src="@drawable/photo_avatar"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/ic_likes"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
