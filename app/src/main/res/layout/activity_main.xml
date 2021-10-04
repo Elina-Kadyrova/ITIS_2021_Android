@@ -4,133 +4,136 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/num_publications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="974"
+        android:layout_marginTop="30dp"
+        android:text="975"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toStartOf="@+id/num_followers"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
         app:layout_constraintTop_toTopOf="@id/iv_avatar" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/iv_avatar"
-        android:layout_width="117dp"
-        android:layout_height="117dp"
-        android:layout_marginTop="25dp"
-        android:paddingHorizontal="5dp"
-        app:civ_border_color="#FFFFFF"
-        app:civ_border_width="2dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="5dp"
+        android:paddingHorizontal="15dp"
         android:src="@drawable/photo_avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/users_name" />
 
     <TextView
         android:id="@+id/users_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:paddingHorizontal="20dp"
         android:text="kad_elina"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <View
+        android:id="@+id/divider1"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@drawable/divider"
-        android:layout_marginVertical="10dp"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="587dp" />
+        android:layout_height="2dp"
+        android:background="@color/grey_200"
+        app:layout_constraintTop_toBottomOf="@id/users_name" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey_200"
+        app:layout_constraintTop_toBottomOf="@id/iv_tape" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:scaleType="centerCrop"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginHorizontal="2dp"
+        android:layout_marginTop="2dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/photo_tape3"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:src="@drawable/photo_tape3" />
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:scaleType="centerCrop"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginHorizontal="2dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/photo_tape2"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        android:src="@drawable/photo_tape2"/>
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:scaleType="centerCrop"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginHorizontal="2dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/photo_tape1"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        android:src="@drawable/photo_tape1" />
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <Button
         android:id="@+id/button"
+        style="@style/RoundedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
         android:text="Редакти..."
         android:textColor="@color/black"
-        android:backgroundTint="@color/white"
-        style="@style/RoundedButton"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Location" />
 
     <Button
         android:id="@+id/button2"
+        style="@style/RoundedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
         android:text="Рекламн..."
         android:textColor="@color/black"
-        android:backgroundTint="@color/white"
-        style="@style/RoundedButton"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/Location" />
 
     <Button
         android:id="@+id/button3"
+        style="@style/RoundedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
         android:text="Статисти..."
         android:textColor="@color/black"
-        style="@style/RoundedButton"
-        android:backgroundTint="@color/white"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button2"
         app:layout_constraintTop_toTopOf="@+id/button2" />
 
@@ -138,9 +141,10 @@
         android:id="@+id/num_followers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1892"
+        android:layout_marginTop="30dp"
+        android:text="1896"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toStartOf="@+id/num_subscription"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/num_publications"
@@ -150,9 +154,10 @@
         android:id="@+id/num_subscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="574"
+        android:layout_marginTop="30dp"
+        android:text="581"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/num_followers"
@@ -163,12 +168,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:text="ELINA KADYROVA Model, Kazan"
+        android:text="ᴇʟɪɴᴀ ᴋᴀᴅʏʀᴏᴠᴀ🖤 Model, Kazan"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+
 
     <TextView
         android:id="@+id/users_personality"
@@ -244,7 +250,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:text="-the soul full of sunshine KFU ITIS 8 лет в моделинге"
+        android:text="▪️the soul full of sunshine☀\n️▪️KFU ITIS💻\n▪️8 лет в моделинге🔥\n Ma: @ildanlikmodels"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -257,7 +263,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:text="Kazan,Tatarstan"
-        android:textColor="@color/design_default_color_primary_dark"
+        android:textColor="@color/blue_800"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -265,27 +271,39 @@
 
     <TextView
         android:id="@+id/tv_publications"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="Публикации"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="@+id/num_publications"
         app:layout_constraintStart_toStartOf="@+id/num_publications"
         app:layout_constraintTop_toBottomOf="@+id/num_publications" />
 
     <TextView
         android:id="@+id/tv_followers"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="Подписчики"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="@+id/num_followers"
         app:layout_constraintStart_toStartOf="@+id/num_followers"
         app:layout_constraintTop_toBottomOf="@+id/num_followers" />
 
     <TextView
         android:id="@+id/tv_subscription"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="Подписки"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="@+id/num_subscription"
         app:layout_constraintStart_toStartOf="@+id/num_subscription"
         app:layout_constraintTop_toBottomOf="@+id/num_subscription" />
@@ -295,8 +313,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="art"
-        android:textSize="15sp"
         android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView_1"
         app:layout_constraintStart_toStartOf="@+id/imageView_1"
         app:layout_constraintTop_toBottomOf="@+id/imageView_1" />
@@ -306,8 +324,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="details"
-        android:textSize="15sp"
         android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView_2"
         app:layout_constraintStart_toStartOf="@+id/imageView_2"
         app:layout_constraintTop_toBottomOf="@+id/imageView_2" />
@@ -317,8 +335,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="me myself a..."
-        android:textSize="15sp"
         android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView_3"
         app:layout_constraintStart_toStartOf="@+id/imageView_3"
         app:layout_constraintTop_toBottomOf="@+id/imageView_3" />
@@ -328,42 +346,102 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="nails"
-        android:textSize="15sp"
         android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView_4"
         app:layout_constraintStart_toStartOf="@+id/imageView_4"
         app:layout_constraintTop_toBottomOf="@+id/imageView_4" />
 
+
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/iv_add"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:src="@drawable/ic_add_box"
+        app:layout_constraintBottom_toBottomOf="@+id/users_name"
+        app:layout_constraintEnd_toStartOf="@+id/iv_menu"
+        app:layout_constraintTop_toTopOf="@id/users_name" />
+
+    <ImageView
+        android:id="@+id/iv_menu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:src="@drawable/ic_menu"
+        app:layout_constraintBottom_toBottomOf="@+id/users_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/users_name" />
+
+    <ImageView
+        android:id="@+id/imageView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/users_name"
+        app:layout_constraintEnd_toEndOf="@id/users_name"
+        app:layout_constraintTop_toTopOf="@+id/users_name"
+        app:srcCompat="@drawable/ic_arrow_down" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_tape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/iv_reels"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_grid_on"
-        tools:layout_editor_absoluteY="553dp" />
+        app:layout_constraintTop_toBottomOf="@id/tv_highlights_1"
+        android:layout_marginTop="10dp"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="40dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:src="@drawable/ic_grid_on" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/iv_reels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_reels"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="553dp" />
+        app:layout_constraintEnd_toStartOf="@+id/iv_igtv"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_tape"
+        app:layout_constraintTop_toTopOf="@id/iv_tape"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="40dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:src="@drawable/ic_reels" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/iv_igtv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_igtv"
-        tools:layout_editor_absoluteX="240dp"
-        tools:layout_editor_absoluteY="553dp" />
+        app:layout_constraintEnd_toStartOf="@+id/iv_marks"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_reels"
+        app:layout_constraintTop_toTopOf="@id/iv_tape"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="40dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:src="@drawable/ic_igtv" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/iv_marks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_marks"
-        tools:layout_editor_absoluteY="553dp" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_igtv"
+        app:layout_constraintTop_toTopOf="@id/iv_tape"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="5dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:src="@drawable/ic_marks" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
