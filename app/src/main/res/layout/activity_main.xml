@@ -69,7 +69,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintBottom_toTopOf="@id/nav_white" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -82,7 +82,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintBottom_toTopOf="@id/nav_white" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -96,7 +96,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@id/nav_white"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@id/button"
@@ -256,11 +257,11 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
-        android:id="@+id/users_description"
+        android:id="@+id/tv_users_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:text="▪️the soul full of sunshine☀\n️▪️KFU ITIS💻\n▪️8 лет в моделинге🔥\n Ma: @ildanlikmodels"
+        android:text="@string/bio_string"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -268,6 +269,7 @@
         app:layout_constraintTop_toBottomOf="@+id/users_personality" />
 
     <EditText
+        android:id="@+id/et_users_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
@@ -275,10 +277,12 @@
         android:maxLength="150"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:visibility="invisible"
+        android:visibility="gone"
+        android:inputType="text"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/users_description" />
+        app:layout_constraintTop_toTopOf="@id/tv_users_description" />
 
     <TextView
         android:id="@+id/Location"
@@ -290,7 +294,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/users_description" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_users_description" />
 
     <TextView
         android:id="@+id/tv_publications"
@@ -413,6 +417,7 @@
         android:paddingHorizontal="40dp"
         android:paddingVertical="5dp"
         android:src="@drawable/ic_grid_on"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toStartOf="@+id/iv_reels"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -462,8 +467,9 @@
         android:id="@+id/btn_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/users_description"
-        app:layout_constraintEnd_toEndOf="@+id/users_description"
+        app:layout_constraintBottom_toTopOf="@id/Location"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
         app:srcCompat="@drawable/ic_edit_text" />
 
     <ImageView
