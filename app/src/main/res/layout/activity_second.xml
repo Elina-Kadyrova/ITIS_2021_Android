@@ -7,21 +7,21 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="310dp"
-        android:layout_height="310dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="367dp"
+        android:layout_height="225dp"
+        android:layout_marginTop="136dp"
+        android:src="@drawable/kazan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_info"
         android:layout_width="347dp"
         android:layout_height="104dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Чудесное место!"
+        android:text="Вы здесь!"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
