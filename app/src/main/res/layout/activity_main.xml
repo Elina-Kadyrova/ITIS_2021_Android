@@ -6,13 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <ImageButton
+        android:id="@+id/ib_store"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/pink_200"
+        android:src="@drawable/ic_store"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/ib_cart"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ib_cart"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/pink_200"
+        android:src="@drawable/ic_cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ib_favorites"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/ib_store" />
+
+    <ImageButton
+        android:id="@+id/ib_favorites"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/pink_200"
+        android:src="@drawable/ic_favorite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ib_account"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/ib_cart" />
+
+    <ImageButton
+        android:id="@+id/ib_account"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/pink_200"
+        android:src="@drawable/ic_account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/ib_favorites" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
