@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
 
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
             .add(R.id.fragment_container, StoreFragment(), TAG_STORE)
-            .setCustomAnimations(R.animator.enter_from_right, R.animator.exit_to_left, R.animator.enter_from_left, R.animator.exit_to_right)
             .commit()
 
         with(binding){
@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun replaceFragment(fragment : Fragment){
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
             .replace(R.id.fragment_container, fragment)
-            .setCustomAnimations(R.animator.enter_from_right, R.animator.exit_to_left, R.animator.enter_from_left, R.animator.exit_to_right)
             .addToBackStack(null)
             .commit()
     }
