@@ -3,9 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AccountFragment"
     android:background="@android:color/holo_orange_dark">
 
     <TextView
+        android:id="@+id/fragment_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ACCOUNT"

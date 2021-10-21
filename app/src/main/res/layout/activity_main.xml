@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pink_200">
@@ -12,37 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="56dp"
-        android:orientation="vertical"
-        tools:context=".MainActivity"/>
-
-    <FrameLayout
-        android:id="@+id/store"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="56dp"
-        android:background="@android:color/holo_red_dark"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/cart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="56dp"
-        tools:background="@android:color/holo_green_dark" />
-
-    <FrameLayout
-        android:id="@+id/favorites"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="56dp"
-        tools:background="@android:color/holo_blue_dark" />
-
-    <FrameLayout
-        android:id="@+id/account"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="56dp"
-        tools:background="@android:color/holo_orange_dark" />
+        android:orientation="vertical" />
 
     <ImageButton
         android:id="@+id/ib_store"
