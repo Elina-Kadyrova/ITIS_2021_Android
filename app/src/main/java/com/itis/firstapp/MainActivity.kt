@@ -8,7 +8,6 @@ import com.itis.firstapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val adapter = RabbitAdapter(RabbitRepository.rabbits)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +15,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater).also {
             setContentView(it.root)
         }
-        setContentView(binding.root)
         init()
     }
 
@@ -26,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         with(binding){
             rvRabbits.addItemDecoration(itemDecoration)
-            rvRabbits.adapter = adapter
+            rvRabbits.adapter = RabbitAdapter(RabbitRepository.rabbits)
         }
 
     }

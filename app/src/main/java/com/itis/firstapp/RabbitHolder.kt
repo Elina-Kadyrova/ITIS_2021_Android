@@ -1,16 +1,25 @@
 package com.itis.firstapp
 
-import android.view.LayoutInflater
+import android.content.Intent
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.itis.firstapp.databinding.ItemRabbitBinding
 
-class RabbitHolder (item: View) : RecyclerView.ViewHolder(item) {
+class RabbitHolder (
+    item: View
+) : RecyclerView.ViewHolder(item) {
 
     private var rabbit: Rabbit? = null
-
     val binding = ItemRabbitBinding.bind(item)
+
+    init {
+        itemView.setOnClickListener {
+            val context = itemView.context
+            val intent = Intent(context,ProfileActivity::class.java)
+            intent.putExtra("id", item.id)
+            context.startActivity(intent)
+        }
+    }
 
     fun bind(item: Rabbit) {
         this.rabbit = item
@@ -19,10 +28,5 @@ class RabbitHolder (item: View) : RecyclerView.ViewHolder(item) {
             tvBreed.text = item.breed
             ivImage.setImageResource(item.photo)
         }
-    }
-
-    companion object {
-        fun create(parent: ViewGroup) = RabbitHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_rabbit, parent, false))
     }
 }
