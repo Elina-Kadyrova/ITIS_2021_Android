@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="72dp"
     android:background="?selectableItemBackground"
     android:paddingHorizontal="16dp"
-    android:paddingVertical="12dp">
+    android:paddingVertical="16dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_image"
@@ -30,19 +30,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_image"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Война и мир" />
+        tools:text="Имя кролика" />
 
     <TextView
         android:id="@+id/tv_breed"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_height="20dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iv_image"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
-        tools:text="Волк Л.Н." />
+        tools:text="Порода кролика" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
