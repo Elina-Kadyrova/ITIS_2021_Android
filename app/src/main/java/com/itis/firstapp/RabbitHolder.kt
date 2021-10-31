@@ -12,21 +12,20 @@ class RabbitHolder (
     private var rabbit: Rabbit? = null
     val binding = ItemRabbitBinding.bind(item)
 
-    init {
-        itemView.setOnClickListener {
-            val context = itemView.context
-            val intent = Intent(context,ProfileActivity::class.java)
-            intent.putExtra("id", item.id)
-            context.startActivity(intent)
-        }
-    }
-
     fun bind(item: Rabbit) {
         this.rabbit = item
         with(binding) {
             tvName.text = item.name
             tvBreed.text = item.breed
             ivImage.setImageResource(item.photo)
+        }
+
+        itemView.setOnClickListener {
+            val context = itemView.context
+            val intent = Intent(context,ProfileActivity::class.java)
+            intent.putExtra("id", item.id)
+            print(item.id)
+            context.startActivity(intent)
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.itis.firstapp
 
 object RabbitRepository {
+
     val rabbits = arrayListOf(
         Rabbit(
             1, R.drawable.ang, "Пушистик", "Ангорский кролик",
@@ -53,6 +54,6 @@ object RabbitRepository {
     )
 
     fun getRabbitById(id: Int): Rabbit {
-        return this.rabbits[id]
+        return this.rabbits[id-1]
     }
 }

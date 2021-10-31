@@ -21,11 +21,9 @@ class MainActivity : AppCompatActivity() {
     private fun init(){
         val itemDecoration: RecyclerView.ItemDecoration =
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-
         with(binding){
             rvRabbits.addItemDecoration(itemDecoration)
             rvRabbits.adapter = RabbitAdapter(RabbitRepository.rabbits)
         }
-
     }
 }

@@ -10,14 +10,13 @@ class ProfileActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.rabbit_profile)
 
         binding = RabbitProfileBinding.inflate(layoutInflater).also {
             setContentView(it.root)
         }
-        setContentView(binding.root)
 
-        var id = intent.extras?.getInt("id")
+        print(intent.extras?.getInt("id"))
+        val id = intent.extras?.getInt("id")
         with(binding){
             val rabbit = id?.let {
                 RabbitRepository.getRabbitById(id)
