@@ -16,8 +16,10 @@ class MainActivity : AppCompatActivity() {
             setContentView(it.root)
         }
         navController = findController(R.id.host_fragment)
+        val bottomNavView = binding?.btmNav
+        //bottomNavView?.setupWithNavController(navController)
 
-        with(binding) {
+       with(binding) {
             this?.btmNav?.setOnNavigationItemSelectedListener {
                 when (it.itemId) {
                     R.id.menu_home -> {
@@ -35,8 +37,7 @@ class MainActivity : AppCompatActivity() {
                     else -> false
                 }
             }
-        }
-
+       }
     }
 
     private fun onHomeClick(){

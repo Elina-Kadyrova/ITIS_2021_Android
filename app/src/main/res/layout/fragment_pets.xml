@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/purple_700">
+    android:background="@color/pink_background">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_places_list"
+        android:id="@+id/rv_rabbits"
         android:layout_width="match_parent"
         android:scrollbars="vertical"
         android:layout_height="match_parent"
@@ -20,11 +20,12 @@
         android:id="@+id/fragment_places_add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_add_24"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        android:contentDescription="Floating button to add a rabbit" />
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Floating button to add a rabbit"
+        android:src="@drawable/ic_add_24"
+        app:backgroundTint="#E811CD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
