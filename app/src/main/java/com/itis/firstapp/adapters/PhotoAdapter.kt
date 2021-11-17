@@ -1,13 +1,11 @@
-package com.itis.firstapp
+package com.itis.firstapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
+import com.itis.firstapp.R
 import com.itis.firstapp.databinding.CardviewPhotoBinding
-import com.itis.firstapp.databinding.FragmentPhotosBinding
-import com.itis.firstapp.repositories.RabbitCardRepository
 
 class PhotoAdapter(
     private val photosList:List<Int>)

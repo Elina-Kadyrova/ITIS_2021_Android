@@ -17,14 +17,14 @@
         tools:listitem="@layout/item_rabbit"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fragment_places_add_button"
+        android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="Floating button to add a rabbit"
         android:src="@drawable/ic_add_24"
-        app:backgroundTint="#E811CD"
+        app:backgroundTint="@color/pink_bright"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

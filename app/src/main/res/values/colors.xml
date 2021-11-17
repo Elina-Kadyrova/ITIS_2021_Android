@@ -10,4 +10,5 @@
 
     <color name="pink_background">#ffc7ec</color>
     <color name="pink_theme_primary">#5e204a</color>
+    <color name="pink_bright">#ff17bd</color>
 </resources>

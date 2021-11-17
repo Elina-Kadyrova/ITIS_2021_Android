@@ -1,8 +1,10 @@
-package com.itis.firstapp
+package com.itis.firstapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.itis.firstapp.R
+import com.itis.firstapp.holders.RabbitHolder
 import com.itis.firstapp.models.Rabbit
 
 class RabbitAdapter (

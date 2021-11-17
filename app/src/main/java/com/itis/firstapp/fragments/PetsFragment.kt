@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.itis.firstapp.R
-import com.itis.firstapp.RabbitAdapter
+import com.itis.firstapp.SpaceItemDecorator
+import com.itis.firstapp.adapters.RabbitAdapter
 import com.itis.firstapp.databinding.FragmentPetsBinding
 import com.itis.firstapp.repositories.RabbitRepository
 
@@ -27,8 +30,20 @@ class PetsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentPetsBinding.bind(view)
+        val decorator = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
+        val spacing = SpaceItemDecorator(requireContext())
+
         with(binding){
-            this!!.rvRabbits.adapter = RabbitAdapter(RabbitRepository.rabbitsList)
+            this!!.rvRabbits.run {
+                adapter = RabbitAdapter(RabbitRepository.rabbitsList)
+                addItemDecoration(decorator)
+                addItemDecoration(spacing)
+            }
+            this!!.addButton.setOnClickListener{
+                val addDialogFragment = AddDialogFragment()
+                val manager = parentFragmentManager
+                addDialogFragment.show(manager, "addDialog")
+            }
         }
     }
 

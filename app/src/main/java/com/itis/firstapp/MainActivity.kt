@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
 import com.itis.firstapp.databinding.ActivityMainBinding
+import com.itis.firstapp.extensions.findController
 
 class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null

@@ -1,4 +1,4 @@
-package com.itis.firstapp
+package com.itis.firstapp.holders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +17,9 @@ class RabbitHolder (
         with(binding) {
             tvName.text = item.name
             tvBreed.text = item.breed
+            itemDelete.setOnClickListener{
+                
+            }
         }
     }
 }
