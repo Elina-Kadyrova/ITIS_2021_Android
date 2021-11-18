@@ -10,7 +10,6 @@ import com.itis.firstapp.holders.RabbitHolder
 import com.itis.firstapp.models.Rabbit
 
 class RabbitAdapter (
-    private val list: List<Rabbit>,
     private val onDeleteItemAction: (Rabbit) -> Unit,
 ) :  ListAdapter<Rabbit, RabbitHolder>(RabbitCallback()) {
 
@@ -18,6 +17,7 @@ class RabbitAdapter (
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rabbit, parent, false)
         return RabbitHolder(view, onDeleteItemAction)
     }
+
 
     override fun onBindViewHolder(holder: RabbitHolder, position: Int, payloads: MutableList<Any>) {
         if (payloads.isEmpty())
@@ -29,13 +29,14 @@ class RabbitAdapter (
         }
     }
 
-    override fun getItemCount(): Int = list.size
-
     override fun onBindViewHolder(holder: RabbitHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(getItem(position))
     }
 
     override fun submitList(list: MutableList<Rabbit>?) {
-        super.submitList(list)
+        super.submitList(
+            if (list == null) null
+            else ArrayList(list)
+        )
     }
 }

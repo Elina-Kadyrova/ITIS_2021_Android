@@ -33,7 +33,7 @@ class PhotosFragment: Fragment() {
         val spacing = SpaceItemDecorator(requireContext())
 
         with(binding){
-            this!!.rvFragmentPhotos.run {
+            this?.rvFragmentPhotos?.run {
                 adapter = CardAdapter(RabbitCardRepository.cardsList)
                 addItemDecoration(decorator)
                 addItemDecoration(spacing)

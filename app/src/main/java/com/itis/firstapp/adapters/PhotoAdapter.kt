@@ -17,7 +17,7 @@ class PhotoAdapter(
         val view = LayoutInflater.from(container.context).inflate(R.layout.cardview_photo,container,false)
         binding = CardviewPhotoBinding.bind(view)
         with(binding){
-            this!!.cardPhotoImage.setImageResource(photosList[position])
+            this?.cardPhotoImage?.setImageResource(photosList[position])
         }
         container.addView(view)
         return view

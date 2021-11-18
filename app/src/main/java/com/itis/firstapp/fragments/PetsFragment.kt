@@ -16,11 +16,10 @@ import com.itis.firstapp.databinding.FragmentPetsBinding
 import com.itis.firstapp.models.Rabbit
 import com.itis.firstapp.repositories.RabbitRepository
 
-
 class PetsFragment: Fragment() {
 
     private var binding: FragmentPetsBinding? = null
-    private var adapter: RabbitAdapter? = null
+    private var rabbitAdapter: RabbitAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,38 +33,36 @@ class PetsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentPetsBinding.bind(view)
+        rabbitAdapter = RabbitAdapter({ deleteRabbit(it) })
         val decorator = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
         val spacing = SpaceItemDecorator(requireContext())
 
         with(binding){
-            this!!.rvRabbits.run {
-                adapter = RabbitAdapter(RabbitRepository.rabbitsList) { deleteRabbit(it) }
+            this?.rvRabbits?.run {
+                adapter = rabbitAdapter
                 addItemDecoration(decorator)
                 addItemDecoration(spacing)
             }
-            this!!.addButton.setOnClickListener{
+            this?.addButton?.setOnClickListener{
                 val addDialogFragment = AddDialogFragment()
                 addDialogFragment.show(parentFragmentManager, "addDialog")
             }
-
             val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val pos = viewHolder.adapterPosition
                     RabbitRepository.rabbitsList.removeAt(pos)
-                    adapter?.notifyItemRemoved(pos)
+                    rabbitAdapter?.submitList(RabbitRepository.rabbitsList)
                 }
             }
-
             val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
-            itemTouchHelper.attachToRecyclerView(this!!.rvRabbits)
-
-            adapter?.submitList(RabbitRepository.rabbitsList)
+            itemTouchHelper.attachToRecyclerView(this?.rvRabbits)
         }
+        rabbitAdapter?.submitList(RabbitRepository.rabbitsList)
     }
 
     private fun deleteRabbit(rabbit: Rabbit){
         RabbitRepository.removeRabbit(rabbit)
-        adapter?.submitList(RabbitRepository.rabbitsList)
+        rabbitAdapter?.submitList(RabbitRepository.rabbitsList)
     }
 
     override fun onDestroyView() {
