@@ -80,13 +80,11 @@ class PetsFragment: Fragment() {
 
     private fun nullData(flag: Boolean) {
         if (!flag) {
-            binding?.let {
-                Snackbar.make(
-                    it.root,
-                    "Введите полные данные",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            }
+            Snackbar.make(
+                requireActivity().findViewById(R.id.host_fragment),
+                "Введите полные данные",
+                Snackbar.LENGTH_LONG
+            ).show()
         }
     }
 

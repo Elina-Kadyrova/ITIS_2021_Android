@@ -45,7 +45,7 @@ class AddDialogFragment: DialogFragment() {
             val name = this?.etName?.text.toString()
             val breed = this?.etBreed?.text.toString()
             val position = this?.etPosition?.text.toString()
-            if (name.isNotEmpty()){
+            if (name.isNotEmpty() && breed.isNotEmpty()){
                 val array = arrayOf(name, breed, position)
                 positiveCallBack?.invoke(array)
             }
