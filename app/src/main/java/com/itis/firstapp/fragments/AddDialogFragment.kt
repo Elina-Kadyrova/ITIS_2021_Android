@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.itis.firstapp.R
 import com.itis.firstapp.databinding.RabbitAddingBinding
 import com.itis.firstapp.models.Rabbit
@@ -13,24 +14,28 @@ import com.itis.firstapp.repositories.RabbitRepository
 
 class AddDialogFragment: DialogFragment() {
     private var binding: RabbitAddingBinding? = null
+    var positiveCallBack: ((Array<String>) -> Unit)? = null
+    var negativeCallBack: ((Boolean) -> Unit)? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
+
+        return parentFragment?.let {
+            val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Добавьте кролика")
-                .setView(LayoutInflater.from(context).inflate(R.layout.rabbit_adding,null))
+                .setView(RabbitAddingBinding.inflate(layoutInflater).let {
+                    binding = it
+                    it.root
+                 })
                 .setMessage("Напишите имя, породу и позицию в списке")
                 .setCancelable(true)
                 .setNegativeButton("Отмена") {
-                        dialog, id ->
+                        dialog, _ ->
                     dialog.cancel()
                 }
-                .setPositiveButton("ОК",
-                    DialogInterface.OnClickListener {
-                            dialog, id ->
-                        addInputRabbit()
-                    }
-                )
+                .setPositiveButton("ОК") {
+                        _, _ ->
+                    addInputRabbit()
+                }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
@@ -38,12 +43,28 @@ class AddDialogFragment: DialogFragment() {
     private fun addInputRabbit(){
         with(binding){
             val name = this?.etName?.text.toString()
-            if(name != ""){
-                val rabbit = Rabbit(
-                    RabbitRepository.rabbitsList.size,
-                    this?.etName?.text.toString(),
-                    this?.etBreed?.text.toString())
-                RabbitRepository.addRabbit(this?.etPosition?.text.toString(), rabbit)
+            val breed = this?.etBreed?.text.toString()
+            val position = this?.etPosition?.text.toString()
+            if (name.isNotEmpty()){
+                val array = arrayOf(name, breed, position)
+                positiveCallBack?.invoke(array)
+            }
+            else{
+                negativeCallBack?.invoke(false)
+            }
+        }
+    }
+
+    companion object {
+        fun show(
+            fragmentManager: FragmentManager,
+            positive: (Array<String>) -> Unit,
+            negative: ((Boolean) -> Unit)? = null
+        ) {
+            AddDialogFragment().apply {
+                positiveCallBack = positive
+                negativeCallBack = negative
+                show(fragmentManager, AddDialogFragment::class.java.name)
             }
         }
     }

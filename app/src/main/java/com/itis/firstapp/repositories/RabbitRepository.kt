@@ -16,32 +16,18 @@ object RabbitRepository {
         Rabbit(i++, "Гном", "Карликовая бабочка")
     )
 
-    fun getRabbitById(id: Int): Rabbit {
-        return this.rabbitsList[id-1]
-    }
-
-    fun addRabbit(rabbitId:String?, rabbit: Rabbit){
-        if (rabbitId != null  && rabbitId != "") {
-            if (rabbitId.toInt() > rabbitsList.size){
+    fun addRabbit(rabbitIndex:Int, rabbit: Rabbit){
+            if (rabbitIndex <= 0 || rabbitIndex > rabbitsList.size){
                 rabbit.id = i++
                 rabbitsList.add(rabbit)
             }
             else{
                 rabbit.id = i++
-                rabbitsList.add(rabbitId.toInt() - 1, rabbit)
+                rabbitsList.add(rabbitIndex - 1, rabbit)
             }
-        }
-        else{
-            rabbit.id = i++
-            rabbitsList.add(rabbit)
-        }
     }
 
     fun removeRabbit(rabbit: Rabbit){
         rabbitsList.remove(rabbit)
-    }
-
-    fun rabbitList(): ArrayList<Rabbit> {
-        return rabbitsList
     }
 }

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.itis.firstapp.R
 import com.itis.firstapp.SwipeToDeleteCallback
 import com.itis.firstapp.decorators.SpaceItemDecorator
@@ -44,8 +45,7 @@ class PetsFragment: Fragment() {
                 addItemDecoration(spacing)
             }
             this?.addButton?.setOnClickListener{
-                val addDialogFragment = AddDialogFragment()
-                addDialogFragment.show(parentFragmentManager, "addDialog")
+                AddDialogFragment.show(childFragmentManager, {addRabbit(it)}, {nullData(it) })
             }
             val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -63,6 +63,31 @@ class PetsFragment: Fragment() {
     private fun deleteRabbit(rabbit: Rabbit){
         RabbitRepository.removeRabbit(rabbit)
         rabbitAdapter?.submitList(RabbitRepository.rabbitsList)
+    }
+
+    private fun addRabbit(array: Array<String>){
+        val name = array[0]
+        val breed = array[1]
+        val position: Int = if (array[2].isEmpty()) {
+            -1
+        } else {
+            array[2].toInt()
+        }
+        val rabbit = Rabbit(RabbitRepository.rabbitsList.size, name, breed)
+        RabbitRepository.addRabbit(position, rabbit)
+        rabbitAdapter?.submitList(RabbitRepository.rabbitsList)
+    }
+
+    private fun nullData(flag: Boolean) {
+        if (!flag) {
+            binding?.let {
+                Snackbar.make(
+                    it.root,
+                    "Введите полные данные",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 
     override fun onDestroyView() {
