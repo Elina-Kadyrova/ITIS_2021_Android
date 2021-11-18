@@ -3,20 +3,45 @@ package com.itis.firstapp.repositories
 import com.itis.firstapp.models.Rabbit
 
 object RabbitRepository {
+    private var i = 1
 
     val rabbitsList = arrayListOf(
-        Rabbit(1, "Пушистик", "Ангорский кролик"),
-        Rabbit(2, "Малыш", "Фландр"),
-        Rabbit(3, "Линди", "Кролик-бабочка"),
-        Rabbit(4, "Оливер", "Рекс"),
-        Rabbit(5, "Снежинка", "Гермелин"),
-        Rabbit(6, "Джеф", "Бургундский кролик"),
-        Rabbit(7,"Джо", "Калифорнийский кролик"),
-        Rabbit(8, "Гном", "Карликовая бабочка")
+        Rabbit(i++, "Пушистик", "Ангорский кролик"),
+        Rabbit(i++, "Малыш", "Фландр"),
+        Rabbit(i++, "Линди", "Кролик-бабочка"),
+        Rabbit(i++, "Оливер", "Рекс"),
+        Rabbit(i++, "Снежинка", "Гермелин"),
+        Rabbit(i++, "Джеф", "Бургундский кролик"),
+        Rabbit(i++,"Джо", "Калифорнийский кролик"),
+        Rabbit(i++, "Гном", "Карликовая бабочка")
     )
 
-    fun addRabbit(rabIndex:String?, rabbit: Rabbit){
-
+    fun getRabbitById(id: Int): Rabbit {
+        return this.rabbitsList[id-1]
     }
 
+    fun addRabbit(rabbitId:String?, rabbit: Rabbit){
+        if (rabbitId != null  && rabbitId != "") {
+            if (rabbitId.toInt() > rabbitsList.size){
+                rabbit.id = i++
+                rabbitsList.add(rabbit)
+            }
+            else{
+                rabbit.id = i++
+                rabbitsList.add(rabbitId.toInt() - 1, rabbit)
+            }
+        }
+        else{
+            rabbit.id = i++
+            rabbitsList.add(rabbit)
+        }
+    }
+
+    fun removeRabbit(rabbit: Rabbit){
+        rabbitsList.remove(rabbit)
+    }
+
+    fun rabbitList(): ArrayList<Rabbit> {
+        return rabbitsList
+    }
 }

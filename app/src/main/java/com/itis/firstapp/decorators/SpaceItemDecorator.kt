@@ -1,4 +1,4 @@
-package com.itis.firstapp
+package com.itis.firstapp.decorators
 
 import android.content.Context
 import android.graphics.Rect

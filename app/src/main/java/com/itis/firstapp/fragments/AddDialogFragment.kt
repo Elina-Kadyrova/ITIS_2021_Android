@@ -28,16 +28,23 @@ class AddDialogFragment: DialogFragment() {
                 .setPositiveButton("ОК",
                     DialogInterface.OnClickListener {
                             dialog, id ->
-                        with(binding){
-                            val rabbit = Rabbit(
-                                RabbitRepository.rabbitsList.size,
-                                this?.etName?.text.toString(),
-                                this?.etBreed?.text.toString())
-                            RabbitRepository.addRabbit(this?.etPosition?.text.toString(), rabbit)
-                        }
+                        addInputRabbit()
                     }
                 )
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    private fun addInputRabbit(){
+        with(binding){
+            val name = this?.etName?.text.toString()
+            if(name != ""){
+                val rabbit = Rabbit(
+                    RabbitRepository.rabbitsList.size,
+                    this?.etName?.text.toString(),
+                    this?.etBreed?.text.toString())
+                RabbitRepository.addRabbit(this?.etPosition?.text.toString(), rabbit)
+            }
+        }
     }
 }

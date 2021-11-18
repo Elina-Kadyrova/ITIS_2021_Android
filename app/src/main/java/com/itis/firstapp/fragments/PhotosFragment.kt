@@ -9,11 +9,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.itis.firstapp.adapters.CardAdapter
 import com.itis.firstapp.R
-import com.itis.firstapp.SpaceItemDecorator
-import com.itis.firstapp.adapters.RabbitAdapter
+import com.itis.firstapp.decorators.SpaceItemDecorator
 import com.itis.firstapp.databinding.FragmentPhotosBinding
 import com.itis.firstapp.repositories.RabbitCardRepository
-import com.itis.firstapp.repositories.RabbitRepository
 
 class PhotosFragment: Fragment() {
 
