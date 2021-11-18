@@ -2,6 +2,25 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
 
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.itis.firstapp.fragments.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+    </fragment>
+    <fragment
+        android:id="@+id/petsFragment"
+        android:name="com.itis.firstapp.fragments.PetsFragment"
+        android:label="PetsFragment"
+        tools:layout="@layout/fragment_pets">
+    </fragment>
+    <fragment
+        android:id="@+id/photosFragment"
+        android:name="com.itis.firstapp.fragments.PhotosFragment"
+        android:label="PhotosFragment"
+        tools:layout="@layout/fragment_photos">
+    </fragment>
 </navigation>
