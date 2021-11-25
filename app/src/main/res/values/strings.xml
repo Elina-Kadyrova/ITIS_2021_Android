@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">FirstApp</string>
+    <string name="app_name">My alarm</string>
+
+    <string name="notification_channel_title">Channel One</string>
+    <string name="notification_channel_desc">Channel One Desc blablabla</string>
+    <string name="notification_channel_id_1">CHANNEL_ID_1</string>
+
+
 </resources>
