@@ -4,17 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/white"
+    tools:context=".activity.MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginBottom="?attr/actionBarSize"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph" />
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Time"
+        android:visibility="invisible"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_action" />
+
+    <Button
+        android:id="@+id/btn_selectTime"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Select time"
+        android:textSize="16sp"
+        android:backgroundTint="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_time" />
+
+    <TextView
+        android:id="@+id/tv_action"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Set the time you want to wake up:"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Start"
+        android:backgroundTint="@color/green_200"
+        app:layout_constraintEnd_toStartOf="@+id/btn_stop"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_selectTime" />
+
+    <Button
+        android:id="@+id/btn_stop"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Stop"
+        android:backgroundTint="@color/orange_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_start"
+        app:layout_constraintTop_toTopOf="@+id/btn_start" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
