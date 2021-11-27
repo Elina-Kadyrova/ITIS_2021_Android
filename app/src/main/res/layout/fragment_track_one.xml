@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/DefaultStyle"
+    tools:context="fragments.OneTrackFragment">
+
+    <ImageView
+        android:id="@+id/track_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_launcher_foreground"
+        style="@style/TrackCover"
+        android:contentDescription="@string/content_description" />
+
+    <TextView
+        android:id="@+id/tv_track_title"
+        style="@style/TrackTitle"
+        android:text="@string/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/track_cover" />
+
+    <TextView
+        android:id="@+id/tv_track_author"
+        style="@style/TrackAuthor"
+        android:text="@string/author"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_track_title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/track_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_huge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_track_author">
+
+        <ImageView
+            android:id="@+id/nav_prev"
+            style="@style/NavigationIcons"
+            android:layout_marginStart="@dimen/width_smaller"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_prev_24"
+            android:contentDescription="@string/content_description" />
+
+        <ImageView
+            android:id="@+id/nav_play"
+            style="@style/NavigationIcons"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_play_arrow_24"
+            android:contentDescription="@string/content_description"/>
+
+        <ImageView
+            android:id="@+id/nav_pause"
+            style="@style/NavigationIcons"
+            app:srcCompat="@drawable/ic_pause_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/content_description"/>
+
+        <ImageView
+            android:id="@+id/nav_next"
+            style="@style/NavigationIcons"
+            android:layout_marginEnd="@dimen/width_smaller"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_next_24"
+            android:contentDescription="@string/content_description"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
