@@ -36,6 +36,9 @@ class OneTrackFragment : Fragment(R.layout.fragment_track_one) {
         super.onResume()
         val intent = Intent(this.context, MusicService::class.java)
         activity?.bindService(intent, binderConnection, Context.BIND_AUTO_CREATE)
+        musicService?.currentTrackId?.let {
+            updateView(it)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,7 +89,6 @@ class OneTrackFragment : Fragment(R.layout.fragment_track_one) {
 
     private fun updateView(id:Int){
         val currentTrack = TrackRepository.getTrackById(id)
-        showPauseSign()
 
         with(binding) {
             this?.tvTrackTitle?.text = currentTrack.title
@@ -96,6 +98,13 @@ class OneTrackFragment : Fragment(R.layout.fragment_track_one) {
                 musicService?.playTrack()
                 showPauseSign()
             }
+        }
+
+        if(musicService?.ismusicplaying() == true){
+            showPauseSign()
+
+        } else {
+            showPlaySign()
         }
     }
 

@@ -35,32 +35,31 @@ class MusicService : Service() {
             "PREVIOUS" -> {
                 playPrev()
                 currentTrackId?.let {
-                    notificationService.buildNotification(it)
+                    notificationService.buildNotificationPause(it)
                 }
-
             }
-            "RESUME" -> {
+            "PAUSE" -> {
                 if (mediaPlayer.isPlaying) pauseTrack()
                 currentTrackId?.let {
-                    notificationService.rebuildNotification(it)
+                    notificationService.buildNotificationPlay(it)
                 }
             }
             "PLAY" ->{
                 if (!mediaPlayer.isPlaying) playTrack()
                 currentTrackId?.let {
-                    notificationService.buildNotification(it)
+                    notificationService.buildNotificationPause(it)
                 }
             }
             "NEXT" -> {
                 playNext()
                 currentTrackId?.let {
-                    notificationService.buildNotification(it)
+                    notificationService.buildNotificationPause(it)
                 }
             }
             "STOP" -> {
                 stopTrack()
                 currentTrackId?.let {
-                    notificationService.rebuildNotification(it)
+                    notificationService.buildNotificationPlay(it)
                 }
             }
         }
@@ -110,7 +109,13 @@ class MusicService : Service() {
         }
         mediaPlayer = MediaPlayer.create(applicationContext, trackList[id].soundtrack)
         currentTrackId = id
-        notificationService.buildNotification(currentTrackId!!)
+        currentTrackId?.let {
+            notificationService.buildNotificationPause(currentTrackId ?: 0)
+        }
+    }
+
+    fun ismusicplaying(): Boolean{
+        return mediaPlayer.isPlaying
     }
 
     override fun onDestroy() {
