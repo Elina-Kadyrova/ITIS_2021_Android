@@ -47,6 +47,25 @@
         <item name="android:textSize">@dimen/text_smaller</item>
     </style>
 
+    <style name="TrackTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/width_normal</item>
+        <item name="android:layout_marginStart">@dimen/spacing_very_large</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_very_large</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/text_large</item>
+    </style>
+
+    <style name="TrackAuthor">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/spacing_very_large</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_very_large</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+    </style>
+
     <style name="TrackCover">
         <item name="android:layout_width">@dimen/width_large</item>
         <item name="android:layout_height">@dimen/width_large</item>
@@ -54,26 +73,10 @@
         <item name="android:layout_marginTop">@dimen/spacing_very_huge</item>
     </style>
 
-    <style name="TrackAuthor">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">@dimen/spacing_very_large</item>
-        <item name="android:textColor">@color/colorSecondaryText</item>
-        <item name="android:textSize">@dimen/text_normal</item>
-    </style>
-
-    <style name="TrackTitle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/width_normal</item>
-        <item name="android:layout_marginStart">@dimen/spacing_very_large</item>
-        <item name="android:textColor">@color/colorPrimaryText</item>
-        <item name="android:textSize">@dimen/text_large</item>
-    </style>
-
     <style name="NavigationIcons">
        <item name="android:layout_width">@dimen/width_normal</item>
         <item name="android:layout_height">@dimen/width_normal</item>
+        <item name="background">@color/colorAccent</item>
     </style>
 
 </resources>

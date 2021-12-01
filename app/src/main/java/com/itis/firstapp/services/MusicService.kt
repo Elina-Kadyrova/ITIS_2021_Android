@@ -9,12 +9,11 @@ import com.itis.firstapp.models.Track
 import com.itis.firstapp.repository.TrackRepository
 
 class MusicService : Service() {
-    private lateinit var mPlayer: MediaPlayer
+    private lateinit var mediaPlayer: MediaPlayer
     var currentTrackId: Int? = null
     lateinit var trackList: ArrayList<Track>
-    private lateinit var musicBinder: MusicBinder;
-
-    private lateinit var notificationController: NotificationService
+    private lateinit var musicBinder: MusicBinder
+    private lateinit var notificationService: NotificationService
 
     inner class MusicBinder : Binder() {
         fun getService(): MusicService = this@MusicService
@@ -24,47 +23,37 @@ class MusicService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        initFields()
-        initNotificationBar()
+        currentTrackId = 0
+        mediaPlayer = MediaPlayer()
+        musicBinder = MusicBinder()
+        trackList = TrackRepository.tracksList
+        notificationService = NotificationService(this).apply {
+            buildNotification(2)
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-//        mPlayer.start()
         when(intent?.action){
             "PREVIOUS" -> {
-                playPreviousTrack()
+                playPrev()
             }
             "RESUME" -> {
-                if (mPlayer.isPlaying) pauseTrack() else playTrack()
+                if (mediaPlayer.isPlaying) pauseTrack()
             }
             "NEXT" -> {
-                playNextTrack()
+                playNext()
+            }
+            "STOP" -> {
+                stopTrack()
+            }
+            "PLAY" ->{
+                if (!mediaPlayer.isPlaying) playTrack()
             }
         }
         return super.onStartCommand(intent, flags, startId)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mPlayer.release()
-    }
-
-    private fun initFields() {
-        currentTrackId = 0
-        mPlayer = MediaPlayer()
-        musicBinder = MusicBinder()
-        trackList = TrackRepository.tracksList
-    }
-
-    private fun initNotificationBar(){
-
-        notificationController = NotificationService(this).apply {
-            build(2)
-        }
-
-    }
-
-    fun playPreviousTrack() {
+    fun playPrev() {
         currentTrackId?.let {
             currentTrackId = if (it == 0) {
                 trackList.size - 1
@@ -76,7 +65,7 @@ class MusicService : Service() {
         }
     }
 
-    fun playNextTrack() {
+    fun playNext() {
         currentTrackId?.let {
             currentTrackId = if (it == trackList.size - 1) {
                 0
@@ -89,22 +78,35 @@ class MusicService : Service() {
     }
 
     fun pauseTrack() {
-        mPlayer.pause()
+        mediaPlayer.pause()
     }
 
     fun playTrack() {
-        mPlayer.start()
+        mediaPlayer.start()
+    }
+
+    fun stopTrack() {
+        mediaPlayer.stop()
+        setTrack(currentTrackId ?: 0)
     }
 
     fun setTrack(id: Int) {
-        if (mPlayer.isPlaying) mPlayer.stop()
-        mPlayer = MediaPlayer.create(applicationContext, trackList[id].soundtrack)
-        currentTrackId = id
-        mPlayer.run {
-            setOnCompletionListener {
-                stop()
-            }
+        var notflag = false
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
+            notflag = true
         }
-        notificationController.build(id)
+        mediaPlayer = MediaPlayer.create(applicationContext, trackList[id].soundtrack)
+        currentTrackId = id
+        if(notflag){
+            notificationService.rebuildNotification(id)
+        } else {
+            notificationService.buildNotification(id)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer.release()
     }
 }

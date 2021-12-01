@@ -7,27 +7,15 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.itis.firstapp.R
-import com.itis.firstapp.models.Track
+import com.itis.firstapp.databinding.FragmentTrackOneBinding
 import com.itis.firstapp.repository.TrackRepository
 import com.itis.firstapp.services.MusicService
 
 class OneTrackFragment : Fragment(R.layout.fragment_track_one) {
-    private var binding: OneTrackFragment? = null
 
-    private lateinit var mTrack: Track
-    private lateinit var titleView: TextView
-    private lateinit var authorView: TextView
-    private lateinit var coverView: ImageView
-
-    private lateinit var previousButton: ImageView
-    private lateinit var playButton: ImageView
-    private lateinit var nextButton: ImageView
-    private lateinit var pauseButton:ImageView
-
+    private var binding: FragmentTrackOneBinding? = null
     private var musicService: MusicService? = null
 
     private val binderConnection = object : ServiceConnection {
@@ -46,85 +34,82 @@ class OneTrackFragment : Fragment(R.layout.fragment_track_one) {
 
     override fun onResume() {
         super.onResume()
-        initService()
-    }
-
-    private fun initService(){
         val intent = Intent(this.context, MusicService::class.java)
         activity?.bindService(intent, binderConnection, Context.BIND_AUTO_CREATE)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initFields()
-    }
-
-    private fun initFields() {
-            previousButton = requireActivity().findViewById(R.id.nav_prev)
-            playButton = requireActivity().findViewById(R.id.nav_play)
-            nextButton = requireActivity().findViewById(R.id.nav_next)
-            pauseButton = requireActivity().findViewById(R.id.nav_pause)
+        binding = FragmentTrackOneBinding.bind(view)
     }
 
     private fun initView() {
-        val id = arguments?.getInt("id")
-        id?.let {
-            mTrack = TrackRepository.tracksList[id]
+        arguments?.getInt("id")?.let { id ->
+            val currentTrack = TrackRepository.getTrackById(id)
 
-            titleView.text = mTrack.title
-            authorView.text = mTrack.author
-            coverView.setImageResource(mTrack.cover)
-            initMusicNavigationView(id)
+            with(binding) {
+                this?.tvTrackTitle?.text = currentTrack.title
+                this?.tvTrackAuthor?.text = currentTrack.author
+                this?.trackCover?.setImageResource(currentTrack.cover)
+            }
+            initMusic(id)
         }
     }
 
-    private fun initMusicNavigationView(id: Int) {
+    private fun initMusic(id: Int) {
         musicService?.setTrack(id)
         musicService?.playTrack()
 
-        playButton.setOnClickListener {
-            musicService?.playTrack()
-            showPauseSign()
-        }
-        previousButton.setOnClickListener {
-            musicService?.playPreviousTrack()
-            updateView(musicService?.currentTrackId?:0)
-        }
-        nextButton.setOnClickListener {
-            musicService?.playNextTrack()
-            updateView(musicService?.currentTrackId?:0)
-        }
-        pauseButton.setOnClickListener {
-            musicService?.pauseTrack()
-            showPlaySign()
+        with(binding){
+            this?.navPlay?.setOnClickListener {
+                musicService?.playTrack()
+                showPauseSign()
+            }
+            this?.navPrev?.setOnClickListener {
+                musicService?.playPrev()
+                updateView(musicService?.currentTrackId?:0)
+            }
+            this?.navNext?.setOnClickListener {
+                musicService?.playNext()
+                updateView(musicService?.currentTrackId?:0)
+            }
+            this?.navPause?.setOnClickListener {
+                musicService?.pauseTrack()
+                showPlaySign()
+            }
+            this?.navStop?.setOnClickListener {
+                musicService?.stopTrack()
+                showPlaySign()
+            }
         }
     }
 
     private fun updateView(id:Int){
-        id.let {
-            mTrack = TrackRepository.tracksList[id]
+        val currentTrack = TrackRepository.getTrackById(id)
+        showPauseSign()
 
-            titleView.text = mTrack.title
-            authorView.text = mTrack.author
-            coverView.setImageResource(mTrack.cover)
-
-            showPauseSign()
-
-            playButton.setOnClickListener {
+        with(binding) {
+            this?.tvTrackTitle?.text = currentTrack.title
+            this?.tvTrackAuthor?.text = currentTrack.author
+            this?.trackCover?.setImageResource(currentTrack.cover)
+            this?.navPlay?.setOnClickListener {
                 musicService?.playTrack()
                 showPauseSign()
             }
-
         }
     }
 
     private fun showPauseSign(){
-        playButton.visibility = View.GONE
-        pauseButton.visibility = View.VISIBLE
+        with(binding){
+            this?.navPlay?.visibility = View.GONE
+            this?.navPause?.visibility = View.VISIBLE
+        }
     }
 
     private fun showPlaySign(){
-        playButton.visibility = View.VISIBLE
-        pauseButton.visibility = View.GONE
+        with(binding){
+            this?.navPlay?.visibility = View.VISIBLE
+            this?.navPause?.visibility = View.GONE
+        }
     }
 }

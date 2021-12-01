@@ -19,6 +19,8 @@
         android:id="@+id/tv_track_title"
         style="@style/TrackTitle"
         android:text="@string/title"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/track_cover" />
 
@@ -26,6 +28,8 @@
         android:id="@+id/tv_track_author"
         style="@style/TrackAuthor"
         android:text="@string/author"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_track_title" />
 
@@ -41,43 +45,59 @@
         <ImageView
             android:id="@+id/nav_prev"
             style="@style/NavigationIcons"
-            android:layout_marginStart="@dimen/width_smaller"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.11"
             app:srcCompat="@drawable/ic_prev_24"
             android:contentDescription="@string/content_description" />
 
         <ImageView
             android:id="@+id/nav_play"
-            style="@style/NavigationIcons"
             android:visibility="gone"
+            style="@style/NavigationIcons"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.35"
             app:srcCompat="@drawable/ic_play_arrow_24"
             android:contentDescription="@string/content_description"/>
 
         <ImageView
             android:id="@+id/nav_pause"
             style="@style/NavigationIcons"
-            app:srcCompat="@drawable/ic_pause_24"
+            android:contentDescription="@string/content_description"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/content_description"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.35"
+            app:srcCompat="@drawable/ic_pause_24" />
 
         <ImageView
             android:id="@+id/nav_next"
             style="@style/NavigationIcons"
-            android:layout_marginEnd="@dimen/width_smaller"
+            android:contentDescription="@string/content_description"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_next_24"
-            android:contentDescription="@string/content_description"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:srcCompat="@drawable/ic_next_24" />
+
+        <ImageView
+            android:id="@+id/nav_stop"
+            style="@style/NavigationIcons"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_stop_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintLeft_toRightOf="@id/nav_next" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

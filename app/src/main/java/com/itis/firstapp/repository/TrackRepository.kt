@@ -4,7 +4,7 @@ import com.itis.firstapp.R
 import com.itis.firstapp.models.Track
 
 object TrackRepository {
-    private var i = 1
+    private var i = 0
 
     val tracksList: ArrayList<Track> = arrayListOf(
         Track(i++,"Snowman","Sia", R.drawable.sia, R.raw.snowman),
@@ -18,4 +18,8 @@ object TrackRepository {
         Track(i++,"Santa tell me","Ariana Grande", R.drawable.grande, R.raw.santa_tell_me),
         Track(i++,"Christmas Lights","Coldplay", R.drawable.coldplay, R.raw.christmas_lights)
     )
+
+    fun getTrackById(id: Int): Track {
+        return this.tracksList[id]
+    }
 }
