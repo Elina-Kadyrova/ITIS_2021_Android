@@ -27,27 +27,41 @@ class MusicService : Service() {
         mediaPlayer = MediaPlayer()
         musicBinder = MusicBinder()
         trackList = TrackRepository.tracksList
-        notificationService = NotificationService(this).apply {
-            buildNotification(2)
-        }
+        notificationService = NotificationService(this)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when(intent?.action){
             "PREVIOUS" -> {
                 playPrev()
+                currentTrackId?.let {
+                    notificationService.buildNotification(it)
+                }
+
             }
             "RESUME" -> {
                 if (mediaPlayer.isPlaying) pauseTrack()
-            }
-            "NEXT" -> {
-                playNext()
-            }
-            "STOP" -> {
-                stopTrack()
+                currentTrackId?.let {
+                    notificationService.rebuildNotification(it)
+                }
             }
             "PLAY" ->{
                 if (!mediaPlayer.isPlaying) playTrack()
+                currentTrackId?.let {
+                    notificationService.buildNotification(it)
+                }
+            }
+            "NEXT" -> {
+                playNext()
+                currentTrackId?.let {
+                    notificationService.buildNotification(it)
+                }
+            }
+            "STOP" -> {
+                stopTrack()
+                currentTrackId?.let {
+                    notificationService.rebuildNotification(it)
+                }
             }
         }
         return super.onStartCommand(intent, flags, startId)
@@ -91,18 +105,12 @@ class MusicService : Service() {
     }
 
     fun setTrack(id: Int) {
-        var notflag = false
         if (mediaPlayer.isPlaying) {
             mediaPlayer.stop()
-            notflag = true
         }
         mediaPlayer = MediaPlayer.create(applicationContext, trackList[id].soundtrack)
         currentTrackId = id
-        if(notflag){
-            notificationService.rebuildNotification(id)
-        } else {
-            notificationService.buildNotification(id)
-        }
+        notificationService.buildNotification(currentTrackId!!)
     }
 
     override fun onDestroy() {

@@ -9,6 +9,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import com.itis.firstapp.MainActivity
 import com.itis.firstapp.R
 import com.itis.firstapp.repository.TrackRepository
 import androidx.media.app.NotificationCompat.MediaStyle as NotificationCompatMediaStyle
@@ -24,6 +25,7 @@ class NotificationService(
     private var nextPendingIntent:PendingIntent?  = null
     private var stopPendingIntent:PendingIntent? = null
     private var playPendingIntent:PendingIntent? = null
+    private var screenPendingIntent:PendingIntent? = null
 
     private val manager by lazy {
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -56,11 +58,13 @@ class NotificationService(
             val playIntent = Intent(context,  MusicService::class.java).apply{
                 action = "PLAY"
             }
+           val screenIntent = Intent(context, MainActivity::class.java)
             previousPendingIntent = PendingIntent.getService(context,0, previousIntent,0)
             resumePendingIntent = PendingIntent.getService(context,1, resumeIntent,0)
             nextPendingIntent = PendingIntent.getService(context,2, nextIntent,0)
             stopPendingIntent = PendingIntent.getService(context, 3, stopIntent, 0)
             playPendingIntent = PendingIntent.getService(context, 4, playIntent, 0)
+            screenPendingIntent = PendingIntent.getService(context, 5, screenIntent, PendingIntent.FLAG_ONE_SHOT)
         }
     }
 
@@ -78,6 +82,7 @@ class NotificationService(
             .setContentText(track.author)
             .setStyle(NotificationCompatMediaStyle())
             .setLargeIcon(BitmapFactory.decodeResource(context.resources,track.cover))
+            .setContentIntent(screenPendingIntent)
 
         manager.notify(notificationId, builder.build())
     }
@@ -95,6 +100,7 @@ class NotificationService(
             .setContentText(track.author)
             .setStyle(NotificationCompatMediaStyle())
             .setLargeIcon(BitmapFactory.decodeResource(context.resources,track.cover))
+            .setContentIntent(screenPendingIntent)
 
         manager.notify(notificationId, builder.build())
     }
