@@ -44,6 +44,7 @@ class OneTrackFragment : Fragment(R.layout.fragment_track_one) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTrackOneBinding.bind(view)
+        initView()
     }
 
     private fun initView() {

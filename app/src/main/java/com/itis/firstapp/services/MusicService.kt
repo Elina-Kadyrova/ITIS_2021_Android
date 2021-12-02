@@ -34,33 +34,18 @@ class MusicService : Service() {
         when(intent?.action){
             "PREVIOUS" -> {
                 playPrev()
-                currentTrackId?.let {
-                    notificationService.buildNotificationPause(it)
-                }
             }
             "PAUSE" -> {
                 if (mediaPlayer.isPlaying) pauseTrack()
-                currentTrackId?.let {
-                    notificationService.buildNotificationPlay(it)
-                }
             }
-            "PLAY" ->{
+            "PLAY" -> {
                 if (!mediaPlayer.isPlaying) playTrack()
-                currentTrackId?.let {
-                    notificationService.buildNotificationPause(it)
-                }
             }
             "NEXT" -> {
                 playNext()
-                currentTrackId?.let {
-                    notificationService.buildNotificationPause(it)
-                }
             }
             "STOP" -> {
                 stopTrack()
-                currentTrackId?.let {
-                    notificationService.buildNotificationPlay(it)
-                }
             }
         }
         return super.onStartCommand(intent, flags, startId)
@@ -92,15 +77,24 @@ class MusicService : Service() {
 
     fun pauseTrack() {
         mediaPlayer.pause()
+        currentTrackId?.let {
+            notificationService.buildNotificationPlay(it)
+        }
     }
 
     fun playTrack() {
         mediaPlayer.start()
+        currentTrackId?.let {
+            notificationService.buildNotificationPause(it)
+        }
     }
 
     fun stopTrack() {
         mediaPlayer.stop()
         setTrack(currentTrackId ?: 0)
+        currentTrackId?.let {
+            notificationService.buildNotificationPlay(it)
+        }
     }
 
     fun setTrack(id: Int) {
@@ -109,9 +103,6 @@ class MusicService : Service() {
         }
         mediaPlayer = MediaPlayer.create(applicationContext, trackList[id].soundtrack)
         currentTrackId = id
-        currentTrackId?.let {
-            notificationService.buildNotificationPause(currentTrackId ?: 0)
-        }
     }
 
     fun ismusicplaying(): Boolean{

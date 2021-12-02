@@ -8,7 +8,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
+import androidx.navigation.NavDeepLinkBuilder
 import com.itis.firstapp.MainActivity
 import com.itis.firstapp.R
 import com.itis.firstapp.repository.TrackRepository
@@ -58,22 +60,23 @@ class NotificationService(
             val playIntent = Intent(context,  MusicService::class.java).apply{
                 action = "PLAY"
             }
-           val screenIntent = Intent(context, MainActivity::class.java).apply{
+           /*val screenIntent = Intent(context, MainActivity::class.java).apply{
                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-           }
+           }*/
 
             previousPendingIntent = PendingIntent.getService(context,0, previousIntent,0)
             resumePendingIntent = PendingIntent.getService(context,1, resumeIntent,0)
             nextPendingIntent = PendingIntent.getService(context,2, nextIntent,0)
             stopPendingIntent = PendingIntent.getService(context, 3, stopIntent, 0)
             playPendingIntent = PendingIntent.getService(context, 4, playIntent, 0)
-            screenPendingIntent = PendingIntent.getService(context, 5, screenIntent, 0)
+            //screenPendingIntent = PendingIntent.getService(context, 5, screenIntent, 0)
         }
     }
 
     fun buildNotificationPause(id:Int){
-
         val track = TrackRepository.tracksList[id]
+
+        screenPendingIntent = createScreenIntent(id)
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_play_arrow_24)
@@ -93,6 +96,8 @@ class NotificationService(
     fun buildNotificationPlay(id:Int){
         val track = TrackRepository.tracksList[id]
 
+        screenPendingIntent = createScreenIntent(id)
+
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_play_arrow_24)
             .addAction(R.drawable.ic_prev_24,"Previous", previousPendingIntent)
@@ -106,5 +111,16 @@ class NotificationService(
             .setContentIntent(screenPendingIntent)
 
         manager.notify(notificationId, builder.build())
+    }
+
+    fun createScreenIntent(id:Int): PendingIntent{
+        val bundle = Bundle()
+        bundle.putInt("id", id)
+        screenPendingIntent = NavDeepLinkBuilder(context)
+            .setGraph(R.navigation.nav_graph)
+            .setDestination(R.id.trackDetailFragment)
+            .setArguments(bundle)
+            .createPendingIntent()
+        return screenPendingIntent as PendingIntent
     }
 }
