@@ -60,16 +60,12 @@ class NotificationService(
             val playIntent = Intent(context,  MusicService::class.java).apply{
                 action = "PLAY"
             }
-           /*val screenIntent = Intent(context, MainActivity::class.java).apply{
-               flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-           }*/
 
             previousPendingIntent = PendingIntent.getService(context,0, previousIntent,0)
             resumePendingIntent = PendingIntent.getService(context,1, resumeIntent,0)
             nextPendingIntent = PendingIntent.getService(context,2, nextIntent,0)
             stopPendingIntent = PendingIntent.getService(context, 3, stopIntent, 0)
             playPendingIntent = PendingIntent.getService(context, 4, playIntent, 0)
-            //screenPendingIntent = PendingIntent.getService(context, 5, screenIntent, 0)
         }
     }
 
@@ -108,15 +104,17 @@ class NotificationService(
             .setContentText(track.author)
             .setStyle(NotificationCompatMediaStyle())
             .setLargeIcon(BitmapFactory.decodeResource(context.resources,track.cover))
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setContentIntent(screenPendingIntent)
 
         manager.notify(notificationId, builder.build())
     }
 
-    fun createScreenIntent(id:Int): PendingIntent{
+    private fun createScreenIntent(id:Int): PendingIntent{
         val bundle = Bundle()
         bundle.putInt("id", id)
         screenPendingIntent = NavDeepLinkBuilder(context)
+            .setComponentName(MainActivity::class.java)
             .setGraph(R.navigation.nav_graph)
             .setDestination(R.id.trackDetailFragment)
             .setArguments(bundle)
