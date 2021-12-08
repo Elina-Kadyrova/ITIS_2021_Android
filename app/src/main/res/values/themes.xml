@@ -1,16 +1,82 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.FirstApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryText</item>
+        <item name="android:textColorSecondary">@color/colorSecondaryText</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimaryVariant</item>
     </style>
+
+    <style name="DefaultStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="ItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/width_bigger</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="ItemCover">
+        <item name="android:layout_width">@dimen/spacing_huge</item>
+        <item name="android:layout_height">@dimen/spacing_huge</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_marginStart">@dimen/spacing_normal</item>
+        <item name="android:layout_marginTop">@dimen/spacing_normal</item>
+    </style>
+
+    <style name="ItemTitle">
+        <item name="android:layout_width">@dimen/spacing_none</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/spacing_normal</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <style name="ItemAuthor">
+        <item name="android:layout_width">@dimen/spacing_none</item>
+        <item name="android:layout_height">@dimen/spacing_large</item>
+        <item name="android:layout_marginStart">@dimen/spacing_normal</item>
+        <item name="android:layout_marginTop">@dimen/spacing_tiniest</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:textSize">@dimen/text_smaller</item>
+    </style>
+
+    <style name="TrackTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/width_normal</item>
+        <item name="android:layout_marginStart">@dimen/spacing_very_large</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_very_large</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/text_large</item>
+    </style>
+
+    <style name="TrackAuthor">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/spacing_very_large</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_very_large</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+    </style>
+
+    <style name="TrackCover">
+        <item name="android:layout_width">@dimen/width_large</item>
+        <item name="android:layout_height">@dimen/width_large</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_marginTop">@dimen/spacing_very_huge</item>
+    </style>
+
+    <style name="NavigationIcons">
+       <item name="android:layout_width">@dimen/width_normal</item>
+        <item name="android:layout_height">@dimen/width_normal</item>
+        <item name="background">@color/colorAccent</item>
+    </style>
+
 </resources>

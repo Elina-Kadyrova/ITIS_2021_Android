@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ItemStyle">
+
+    <ImageView
+        android:id="@+id/iv_cover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_launcher_foreground"
+        style="@style/ItemCover"
+        android:contentDescription="@string/content_description" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        app:layout_constraintStart_toEndOf="@+id/iv_cover"
+        app:layout_constraintTop_toTopOf="@+id/iv_cover"
+        android:text="@string/title"
+        style="@style/ItemTitle" />
+
+    <TextView
+        android:id="@+id/tv_author"
+        app:layout_constraintStart_toEndOf="@+id/iv_cover"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        android:text="@string/author"
+        style="@style/ItemAuthor" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
