@@ -9,4 +9,6 @@
     <string name="add_geolocation">Add geolocation</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
+    <string name="longitude">Longitude: -</string>
+    <string name="latitude">Latitude: -</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.itis.firstapp.ui.objects
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,11 +13,25 @@ class TaskHolder(
     private val onItemDeleteAction: (item: Task) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Task) = with(binding) {
-        tvTitle.text =
-            if (item.title != "")
-                item.title
-            else "No title of task"
+    @SuppressLint("SetTextI18n")
+    fun bind(item: Task) =
+        with(binding) {
+            tvTitle.text =
+                if (item.title != "")
+                    item.title
+                else "No title of task"
+            tvDescription.text =
+                if (item.description != "")
+                    item.description
+                else "No description of task"
+            tvLongitude.text =
+                if (item.longitude != null)
+                     "Longitude: ${item.longitude.toString()}"
+                else "Longitude: -"
+            tvLatitude.text =
+                if (item.latitude != null)
+                    "Latitude: ${item.latitude.toString()}"
+                else "Latitude: -"
 
         itemView.setOnClickListener {
             onItemChosenAction.invoke(item)
