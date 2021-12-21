@@ -11,4 +11,5 @@
     <string name="done">Done</string>
     <string name="longitude">Longitude: -</string>
     <string name="latitude">Latitude: -</string>
+    <string name="time">Task time</string>
 </resources>

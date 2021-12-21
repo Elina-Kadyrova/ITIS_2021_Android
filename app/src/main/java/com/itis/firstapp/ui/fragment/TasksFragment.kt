@@ -1,6 +1,7 @@
 package com.itis.firstapp.ui.fragment
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.pm.PackageManager
 import android.icu.text.SimpleDateFormat
@@ -72,8 +73,9 @@ class TasksFragment : Fragment() {
 
     private fun showDatePicker(bindingOfEditScreen: AddTaskFragmentBinding) {
         calendar = Calendar.getInstance()
-        calendar?.let { calendar ->
-            DatePickerDialog(
+        calendar?.let {
+                calendar ->
+           DatePickerDialog(
                 requireContext(),
                 { _, year, month, day ->
                     calendar.set(Calendar.YEAR, year)
@@ -131,11 +133,11 @@ class TasksFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun convertToTime(time: Long?): String {
         time?.let {
-            val date = Date(it)
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                SimpleDateFormat("dd.MM.yyyy HH:mm").format(date)
+                SimpleDateFormat("dd.MM.yyyy HH:mm").format(Date(it))
             } else ""
         }
         return ""

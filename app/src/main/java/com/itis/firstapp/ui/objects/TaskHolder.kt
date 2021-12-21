@@ -1,6 +1,8 @@
 package com.itis.firstapp.ui.objects
 
 import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,13 +15,21 @@ class TaskHolder(
     private val onItemDeleteAction: (item: Task) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     fun bind(item: Task) =
         with(binding) {
             tvTitle.text =
                 if (item.title != "")
                     item.title
                 else "No title of task"
+            tvTime.text =
+                if (item.date != null)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        SimpleDateFormat("dd.MM.yyyy HH:mm").format(item.date)
+                    } else {
+                        ""
+                    }
+                else "No time"
             tvDescription.text =
                 if (item.description != "")
                     item.description

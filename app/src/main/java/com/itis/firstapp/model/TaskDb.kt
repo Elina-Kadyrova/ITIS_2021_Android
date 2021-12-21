@@ -7,7 +7,7 @@ import com.itis.firstapp.model.dao.DateConverter
 import com.itis.firstapp.model.dao.TaskDao
 import com.itis.firstapp.model.entities.Task
 
-@Database(entities = [Task::class], version = 1)
+@Database(entities = [Task::class], version = 1, exportSchema = true)
 @TypeConverters(DateConverter::class)
     abstract class TaskDb : RoomDatabase() {
 
