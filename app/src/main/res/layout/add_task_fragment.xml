@@ -6,7 +6,7 @@
     android:layout_marginHorizontal="40dp">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/enter_title_text"
+        android:id="@+id/et_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="@string/title"
@@ -17,16 +17,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/enter_description"
+        android:id="@+id/et_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
         android:hint="@string/description"
-        app:layout_constraintTop_toBottomOf="@+id/enter_title_text" />
+        app:layout_constraintTop_toBottomOf="@+id/et_title" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/setup_time"
+        android:id="@+id/et_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
@@ -34,10 +34,10 @@
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
         android:textColor="@color/purple_500"
-        app:layout_constraintTop_toBottomOf="@+id/enter_description" />
+        app:layout_constraintTop_toBottomOf="@+id/et_desc" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/setup_location"
+        android:id="@+id/et_geolocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
@@ -45,26 +45,26 @@
         android:layout_marginTop="10dp"
         android:text="@string/add_geolocation"
         android:textColor="@color/purple_500"
-        app:layout_constraintTop_toBottomOf="@+id/setup_time" />
+        app:layout_constraintTop_toBottomOf="@+id/et_time" />
 
     <Button
-        android:id="@+id/noBtn"
+        android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/cancel"
-        app:layout_constraintEnd_toStartOf="@+id/okBtn"
+        app:layout_constraintEnd_toStartOf="@+id/done_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setup_location" />
+        app:layout_constraintTop_toBottomOf="@+id/et_geolocation" />
 
     <Button
-        android:id="@+id/okBtn"
+        android:id="@+id/done_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/done"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/noBtn"
-        app:layout_constraintTop_toBottomOf="@+id/setup_location" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_btn"
+        app:layout_constraintTop_toBottomOf="@+id/et_geolocation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

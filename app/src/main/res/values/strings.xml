@@ -3,7 +3,6 @@
     <string name="edit_task">Edit task</string>
     <string name="title">Task title</string>
     <string name="description">Task description</string>
-    <string name="delete_all_tasks_notif">Are you sure to delete all tasks?</string>
     <string name="empty_todo">Add your first task</string>
     <string name="delete_all">Delete all</string>
     <string name="choose_time">Choose time</string>

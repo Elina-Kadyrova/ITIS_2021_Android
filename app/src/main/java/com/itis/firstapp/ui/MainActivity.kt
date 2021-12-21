@@ -37,31 +37,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.delete_all_tasks) {
-            if (taskDb.taskDao().getAll().isNotEmpty()) {
-                AlertDialog.Builder(this)
-                    .setMessage(R.string.delete_all_tasks_notif)
-                    .setPositiveButton("Yes") {
-                            dialog, _ ->
-                        taskDb.taskDao().deleteAll()
-                        initFragment()
-                        dialog.dismiss()
-                    }
-                    .setNegativeButton("Cancel") {
-                            dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .show()
-            } else
-                binding?.let {
-                    Snackbar.make(
-                        it.root,
-                        "You have no tasks",
-                        2000)
-                        .show()
-                }
+        when(item.itemId){
+            R.id.delete_all_tasks -> deleteAllItems()
         }
         return true
+    }
+
+    private fun deleteAllItems(){
+        if (taskDb.taskDao().getAll().isNotEmpty()) {
+
+            AlertDialog.Builder(this)
+                .setMessage("Are you sure to delete all tasks?")
+                .setPositiveButton("Yes") {
+                        dialog, _ ->
+                    taskDb.taskDao().deleteAll()
+                    initFragment()
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Cancel") {
+                        dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+
+        } else
+            binding?.let {
+                Snackbar.make(
+                    it.root,
+                    "You have no tasks",
+                    2000)
+                    .show()
+            }
     }
 }
 

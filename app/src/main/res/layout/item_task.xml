@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/brief_task_view"
+        android:id="@+id/item_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -22,13 +22,14 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title"
-            android:textSize="18sp"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="40dp"/>
+            android:text="@string/title"
+            android:textSize="18sp" />
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/delete_task_btn"
@@ -39,7 +40,7 @@
             android:layout_marginEnd="16dp"
             android:layout_margin="8dp"
             android:background="@drawable/done_24"
-            android:backgroundTint="@color/purple_200" />
+            android:backgroundTint="@color/black"/>
 
     </com.google.android.material.card.MaterialCardView>
 

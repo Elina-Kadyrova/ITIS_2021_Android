@@ -18,7 +18,7 @@ class TaskHolder(
                 item.title
             else "No title of task"
 
-        briefTaskView.setOnClickListener {
+        itemView.setOnClickListener {
             onItemChosenAction.invoke(item)
         }
 

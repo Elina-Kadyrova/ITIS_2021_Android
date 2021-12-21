@@ -15,12 +15,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.TimeFormat
+import com.google.android.material.timepicker.TimeFormat.CLOCK_24H
 import com.itis.firstapp.databinding.AddTaskFragmentBinding
 import com.itis.firstapp.databinding.TasksFragmentBinding
 import com.itis.firstapp.ui.MainActivity
@@ -50,24 +48,26 @@ class TasksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         taskDb = (requireActivity() as MainActivity).taskDb
         initRecyclerView()
-        binding.addGoalBtn.setOnClickListener {
+        binding.addBtn.setOnClickListener {
             showEditOrAddAlertDialog(null, 0)
         }
     }
 
     private fun initRecyclerView() {
         val goals = taskDb.taskDao().getAll() as ArrayList<Task>
-        with(binding.allGoals) {
-            layoutManager = LinearLayoutManager(context).apply {
-                orientation = RecyclerView.VERTICAL
-            }
+        with(binding.rvTasks) {
             adapter = TaskAdapter(goals,
-                {showGoalAlertDialog(it)},
+                {showEditOrAddAlertDialog(it, 1)},
                 {taskDb.taskDao().deleteGoal(it.id)
                     initRecyclerView()
                 })
         }
-        setupNoGoalsNotification()
+        with(binding) {
+            emptyTasks.visibility =
+                if (taskDb.taskDao().getAll().isNotEmpty())
+                    View.GONE
+                else View.VISIBLE
+        }
     }
 
     private fun showDatePicker(bindingOfEditScreen: AddTaskFragmentBinding) {
@@ -89,21 +89,23 @@ class TasksFragment : Fragment() {
     }
 
     private fun showTimePicker(bindingOfEditScreen: AddTaskFragmentBinding) {
-        val datePicker = MaterialTimePicker.Builder()
-            .setTimeFormat(TimeFormat.CLOCK_24H)
+
+        val picker = MaterialTimePicker.Builder()
+            .setTimeFormat(CLOCK_24H)
             .setHour(12)
             .setMinute(0)
             .setTitleText("Choose time")
             .build()
-        with(datePicker) {
-            show(this@TasksFragment.childFragmentManager, "time")
+
+        with(picker) {
+            show(this@TasksFragment.childFragmentManager, "TIME")
             addOnPositiveButtonClickListener {
                 calendar?.let {
-                    it[Calendar.HOUR_OF_DAY] = datePicker.hour
-                    it[Calendar.MINUTE] = datePicker.minute
+                    it[Calendar.HOUR_OF_DAY] = picker.hour
+                    it[Calendar.MINUTE] = picker.minute
                     it[Calendar.SECOND] = 0
                     it[Calendar.MILLISECOND] = 0
-                    bindingOfEditScreen.setupTime.text = convertToTime(calendar?.time?.time)
+                    bindingOfEditScreen.etTime.text = convertToTime(calendar?.time?.time)
                 }
             }
         }
@@ -119,7 +121,11 @@ class TasksFragment : Fragment() {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     setupLocation()
                 } else {
-                    Toast.makeText(context, "Access to location denied", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Access to location denied",
+                        Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
@@ -134,40 +140,6 @@ class TasksFragment : Fragment() {
         }
         return ""
     }
-
-
-    private fun setupNoGoalsNotification() {
-        with(binding) {
-            noGoalsText.visibility =
-                if (taskDb.taskDao().getAll().isNotEmpty()) View.GONE else View.VISIBLE
-        }
-    }
-
-    private fun showGoalAlertDialog(task: Task) {
-        context?.let {
-            AlertDialog.Builder(it)
-                .setTitle(task.title)
-                .setMessage(getMessage(task))
-                .setPositiveButton("OK") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .setNeutralButton("Edit") { dialog, _ ->
-                    showEditOrAddAlertDialog(task, 1)
-                    dialog.dismiss()
-                }
-                .show()
-        }
-    }
-
-    private fun getMessage(task: Task): String =
-        StringBuilder()
-            .append("${task.description}\nDate and time: ")
-            .append(convertToTime(task.date?.time))
-            .append("\nLongitude: ")
-            .append(task.longitude ?: "-")
-            .append("\nLatitude: ")
-            .append(task.latitude ?: "-")
-            .toString()
 
     private fun showEditOrAddAlertDialog(task: Task?, editOrAdd: Int) {
         val bindingOfEditScreen = AddTaskFragmentBinding.inflate(LayoutInflater.from(context))
@@ -184,29 +156,29 @@ class TasksFragment : Fragment() {
         when (editOrAdd) {
             1 -> {
                 with(bindingOfEditScreen) {
-                    enterTitleText.text = SpannableStringBuilder(task?.title)
-                    enterDescription.text = SpannableStringBuilder(task?.description)
+                    etTitle.text = SpannableStringBuilder(task?.title)
+                    etDesc.text = SpannableStringBuilder(task?.description)
                     longitude = task?.longitude
                     latitude = task?.latitude
                 }
             }
         }
-        bindingOfEditScreen.setupTime.setOnClickListener {
+        bindingOfEditScreen.etTime.setOnClickListener {
             showDatePicker(bindingOfEditScreen)
             needToChangeDate = true
         }
-        bindingOfEditScreen.setupLocation.setOnClickListener {
+        bindingOfEditScreen.etGeolocation.setOnClickListener {
             setupLocation()
         }
-        bindingOfEditScreen.okBtn.setOnClickListener {
+        bindingOfEditScreen.doneBtn.setOnClickListener {
             when (editOrAdd) {
                 1 -> {
                     with(taskDb.taskDao()) {
                         task?.id?.let { it1 ->
-                            updateTitle(it1, bindingOfEditScreen.enterTitleText.text.toString())
+                            updateTitle(it1, bindingOfEditScreen.etTitle.text.toString())
                             updateDescription(
                                 it1,
-                                bindingOfEditScreen.enterDescription.text.toString()
+                                bindingOfEditScreen.etDesc.text.toString()
                             )
                             updateDate(it1, calendar?.time)
                             updateLongitude(it1, longitude)
@@ -217,8 +189,8 @@ class TasksFragment : Fragment() {
                 else -> {
                     val newGoal = Task(
                         0,
-                        bindingOfEditScreen.enterTitleText.text.toString(),
-                        bindingOfEditScreen.enterDescription.text.toString(),
+                        bindingOfEditScreen.etTitle.text.toString(),
+                        bindingOfEditScreen.etDesc.text.toString(),
                         if (needToChangeDate) calendar?.time else null,
                         longitude,
                         latitude
@@ -232,7 +204,7 @@ class TasksFragment : Fragment() {
             initRecyclerView()
             alert?.dismiss()
         }
-        bindingOfEditScreen.noBtn.setOnClickListener {
+        bindingOfEditScreen.cancelBtn.setOnClickListener {
             alert?.dismiss()
         }
     }
@@ -254,13 +226,13 @@ class TasksFragment : Fragment() {
             client.lastLocation.addOnSuccessListener { location: Location? ->
                 latitude = location?.latitude
                 longitude = location?.longitude
-                Toast.makeText(context,
+                Toast.makeText(
+                    context,
                     if (location != null)
                         "Geolocation found"
                     else "Geolocation not found. Please enable it to get all the features.",
                     if (location != null)
-                        Toast.LENGTH_SHORT
-                    else Toast.LENGTH_LONG)
+                        Toast.LENGTH_SHORT else Toast.LENGTH_LONG)
                     .show()
             }
         }
