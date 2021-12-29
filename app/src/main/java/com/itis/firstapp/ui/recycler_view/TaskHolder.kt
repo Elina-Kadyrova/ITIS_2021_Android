@@ -1,4 +1,4 @@
-package com.itis.firstapp.ui.objects
+package com.itis.firstapp.ui.recycler_view
 
 import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat

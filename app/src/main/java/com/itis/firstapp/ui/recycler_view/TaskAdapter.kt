@@ -1,4 +1,4 @@
-package com.itis.firstapp.ui.objects
+package com.itis.firstapp.ui.recycler_view
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

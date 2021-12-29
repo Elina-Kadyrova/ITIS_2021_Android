@@ -25,7 +25,8 @@ import com.itis.firstapp.databinding.TasksFragmentBinding
 import com.itis.firstapp.ui.MainActivity
 import com.itis.firstapp.model.TaskDb
 import com.itis.firstapp.model.entities.Task
-import com.itis.firstapp.ui.objects.TaskAdapter
+import com.itis.firstapp.ui.recycler_view.SpaceItemDecorator
+import com.itis.firstapp.ui.recycler_view.TaskAdapter
 import java.util.*
 
 class TasksFragment : Fragment() {
@@ -33,6 +34,7 @@ class TasksFragment : Fragment() {
     private lateinit var binding: TasksFragmentBinding
     private lateinit var taskDb: TaskDb
     private lateinit var client: FusedLocationProviderClient
+    private var spacing: SpaceItemDecorator? = null
     private var calendar: Calendar? = null
     private var longitude: Double? = null
     private var latitude: Double? = null
@@ -48,6 +50,7 @@ class TasksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         taskDb = (requireActivity() as MainActivity).taskDb
+        spacing = SpaceItemDecorator(requireContext())
         initRecyclerView()
         binding.addBtn.setOnClickListener {
             showEditDialog(null, 0)
@@ -63,6 +66,7 @@ class TasksFragment : Fragment() {
                     {taskDb.taskDao().deleteTask(it.id)
                         initRecyclerView()
                     })
+                spacing?.let { addItemDecoration(it) }
             }
             emptyTasks.visibility =
                 if (taskDb.taskDao().getAll().isNotEmpty())
@@ -146,7 +150,7 @@ class TasksFragment : Fragment() {
     private fun showEditDialog(task: Task?, editOrAdd: Int) {
         val bindingOfEditScreen = AddTaskFragmentBinding.inflate(LayoutInflater.from(context))
         var needToChangeDate = false
-        val alert = context?.let {
+        val alertDialog = context?.let {
             AlertDialog.Builder(it).apply {
                 setTitle(
                     if (editOrAdd == 1)
@@ -204,10 +208,10 @@ class TasksFragment : Fragment() {
             latitude = null
             longitude = null
             initRecyclerView()
-            alert?.dismiss()
+            alertDialog?.dismiss()
         }
         bindingOfEditScreen.cancelBtn.setOnClickListener {
-            alert?.dismiss()
+            alertDialog?.dismiss()
         }
     }
 
