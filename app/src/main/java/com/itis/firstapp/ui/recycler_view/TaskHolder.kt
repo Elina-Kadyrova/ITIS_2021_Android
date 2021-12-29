@@ -11,8 +11,8 @@ import com.itis.firstapp.model.entities.Task
 
 class TaskHolder(
     private val binding: ItemTaskBinding,
-    private val onItemChosenAction: (item: Task) -> Unit,
-    private val onItemDeleteAction: (item: Task) -> Unit
+    private val onItemChosenAction: (Int) -> Unit,
+    private val onItemDeleteAction: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
@@ -44,18 +44,18 @@ class TaskHolder(
                 else "Latitude: -"
 
         itemView.setOnClickListener {
-            onItemChosenAction.invoke(item)
+            onItemChosenAction.invoke(item.id)
         }
 
         deleteTaskBtn.setOnClickListener {
-            onItemDeleteAction.invoke(item)
+            onItemDeleteAction.invoke(item.id)
         }
     }
 
     companion object {
         fun create(parent: ViewGroup,
-                   onItemChosenAction: (item: Task) -> Unit,
-                   onItemDeleteAction: (item:Task) -> Unit) =
+                   onItemChosenAction: (Int) -> Unit,
+                   onItemDeleteAction: (Int) -> Unit) =
             TaskHolder (
                 ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false),
                 onItemChosenAction, onItemDeleteAction)

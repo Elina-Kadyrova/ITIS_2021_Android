@@ -5,6 +5,6 @@
     <item
         android:id="@+id/delete_all_tasks"
         android:title="@string/delete_all"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/delete_24"/>
 </menu>

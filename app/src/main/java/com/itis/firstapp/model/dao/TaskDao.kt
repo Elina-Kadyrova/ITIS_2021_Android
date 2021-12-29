@@ -13,20 +13,11 @@ interface TaskDao {
     @Query("SELECT * FROM task")
     fun getAll(): List<Task>
 
-    @Query("UPDATE task SET title=:title WHERE (id=:id)")
-    fun updateTitle(id: Int, title: String?)
+    @Query("SELECT * FROM task WHERE id = :id")
+    fun getTaskById(id: Int): Task?
 
-    @Query("UPDATE task SET description=:description WHERE (id=:id)")
-    fun updateDescription(id: Int, description: String?)
-
-    @Query("UPDATE task SET date=:date WHERE (id=:id)")
-    fun updateDate(id: Int, date: Date?)
-
-    @Query("UPDATE task SET latitude=:latitude WHERE (id=:id)")
-    fun updateLatitude(id: Int, latitude: Double?)
-
-    @Query("UPDATE task SET longitude=:longitude WHERE (id=:id)")
-    fun updateLongitude(id: Int, longitude: Double?)
+    @Update
+    fun updateTask(task: Task)
 
     @Query("DELETE FROM task WHERE id=:task")
     fun deleteTask(task: Int)

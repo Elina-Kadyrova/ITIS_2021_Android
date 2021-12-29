@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import com.google.android.material.snackbar.Snackbar
 import com.itis.firstapp.R
 import com.itis.firstapp.databinding.ActivityMainBinding
@@ -12,62 +13,21 @@ import com.itis.firstapp.model.DbCreator
 import com.itis.firstapp.model.TaskDb
 import com.itis.firstapp.ui.fragment.TasksFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private var binding: ActivityMainBinding? = null
     lateinit var taskDb:TaskDb
+    private lateinit var controller: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
         taskDb = DbCreator().initDB(this)
-        initFragment()
+        controller = findController(R.id.container)
     }
 
-    private fun initFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, TasksFragment())
-            .commit()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        this.menuInflater.inflate(R.menu.todo_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.delete_all_tasks -> deleteAllItems()
+    override fun onBackPressed() {
+        when(supportFragmentManager.backStackEntryCount){
+            0 -> super.onBackPressed()
+            else -> supportFragmentManager.popBackStack()
         }
-        return true
-    }
-
-    private fun deleteAllItems(){
-        if (taskDb.taskDao().getAll().isNotEmpty()) {
-
-            AlertDialog.Builder(this)
-                .setMessage("Are you sure to delete all tasks?")
-                .setPositiveButton("Yes") {
-                        dialog, _ ->
-                    taskDb.taskDao().deleteAll()
-                    initFragment()
-                    dialog.dismiss()
-                }
-                .setNegativeButton("Cancel") {
-                        dialog, _ ->
-                    dialog.dismiss()
-                }
-                .show()
-
-        } else
-            binding?.let {
-                Snackbar.make(
-                    it.root,
-                    "You have no tasks",
-                    2000)
-                    .show()
-            }
     }
 }
-
