@@ -28,8 +28,8 @@ interface TaskDao {
     @Query("UPDATE task SET longitude=:longitude WHERE (id=:id)")
     fun updateLongitude(id: Int, longitude: Double?)
 
-    @Query("DELETE FROM task WHERE id=:goal")
-    fun deleteGoal(goal: Int)
+    @Query("DELETE FROM task WHERE id=:task")
+    fun deleteTask(task: Int)
 
     @Query("DELETE FROM task")
     fun deleteAll()

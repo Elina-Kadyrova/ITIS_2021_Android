@@ -50,20 +50,20 @@ class TasksFragment : Fragment() {
         taskDb = (requireActivity() as MainActivity).taskDb
         initRecyclerView()
         binding.addBtn.setOnClickListener {
-            showEditOrAddAlertDialog(null, 0)
+            showEditDialog(null, 0)
         }
     }
 
     private fun initRecyclerView() {
-        val goals = taskDb.taskDao().getAll() as ArrayList<Task>
-        with(binding.rvTasks) {
-            adapter = TaskAdapter(goals,
-                {showEditOrAddAlertDialog(it, 1)},
-                {taskDb.taskDao().deleteGoal(it.id)
-                    initRecyclerView()
-                })
-        }
+        val tasksList = taskDb.taskDao().getAll() as ArrayList<Task>
         with(binding) {
+            rvTasks.run{
+                adapter = TaskAdapter(tasksList,
+                    {showEditDialog(it, 1)},
+                    {taskDb.taskDao().deleteTask(it.id)
+                        initRecyclerView()
+                    })
+            }
             emptyTasks.visibility =
                 if (taskDb.taskDao().getAll().isNotEmpty())
                     View.GONE
@@ -143,7 +143,7 @@ class TasksFragment : Fragment() {
         return ""
     }
 
-    private fun showEditOrAddAlertDialog(task: Task?, editOrAdd: Int) {
+    private fun showEditDialog(task: Task?, editOrAdd: Int) {
         val bindingOfEditScreen = AddTaskFragmentBinding.inflate(LayoutInflater.from(context))
         var needToChangeDate = false
         val alert = context?.let {
