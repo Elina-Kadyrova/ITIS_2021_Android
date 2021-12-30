@@ -15,7 +15,7 @@ class TaskHolder(
     private val onItemDeleteAction: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    @SuppressLint("SetTextI18n", "SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat")
     fun bind(item: Task) =
         with(binding) {
             tvTitle.text =
@@ -25,7 +25,7 @@ class TaskHolder(
             tvTime.text =
                 if (item.date != null)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        SimpleDateFormat("dd.MM.yyyy HH:mm").format(item.date)
+                        SimpleDateFormat("dd.MM.yyyy").format(item.date)
                     } else {
                         ""
                     }

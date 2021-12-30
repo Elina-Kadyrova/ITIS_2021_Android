@@ -5,7 +5,7 @@
     <string name="description">Task description</string>
     <string name="empty_todo">Add your first task</string>
     <string name="delete_all">Delete all</string>
-    <string name="choose_time">Choose time</string>
+    <string name="choose_date">Choose date</string>
     <string name="add_geolocation">Add geolocation</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>

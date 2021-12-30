@@ -51,15 +51,17 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
                 }
                 setOnMenuItemClickListener { onOptionsItemSelected(it) }
             }
-            etTime.setOnClickListener {
+            btnDate.setOnClickListener {
                 showDatePicker()
             }
             doneBtn.setOnClickListener{
                 saveTask()
             }
+            btnGeolocation.setOnClickListener{
+               setLocation()
+            }
         }
         isTaskExists()
-        setLocation()
     }
 
     private fun setLocation(){
@@ -78,8 +80,7 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
             return (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            )
-                    == PackageManager.PERMISSION_GRANTED &&
+            ) == PackageManager.PERMISSION_GRANTED &&
                     ContextCompat.checkSelfPermission(
                         this,
                         Manifest.permission.ACCESS_COARSE_LOCATION
@@ -101,7 +102,7 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
             getCurrentLocation()
         }
         else {
-            returnToMainFragment()
+            showMessage("Access to location denied")
         }
     }
 
@@ -113,7 +114,11 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
             client.lastLocation.addOnSuccessListener { location: Location? ->
                 latitude = location?.latitude
                 longitude = location?.longitude
-                showMessage("Geolocation successfully added.")
+                if (location != null){
+                    showMessage( "Geolocation found")
+                } else {
+                    showMessage( "Geolocation not found. Please enable it to get all the features")
+                }
             }
         } else {
             startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
@@ -147,7 +152,7 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
         if (currentTaskId == null && isDataCorrect()) {
             addTask()
             showMessage("Task successfully added")
-            returnToMainFragment()
+            returnToTasksFragment()
         }
     }
 
@@ -155,7 +160,7 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
         if (isDataCorrect()) {
             updateData(id)
             showMessage("Task successfully updated.")
-            returnToMainFragment()
+            returnToTasksFragment()
         }
     }
 
@@ -204,7 +209,6 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
     private fun showDatePicker() {
         calendar = Calendar.getInstance()
         val datePickerFragment = DatePickerFragment()
-        val timePickerFragment = TimePickerDialog()
         val supportFragmentManager = requireActivity().supportFragmentManager
 
         supportFragmentManager.setFragmentResultListener(
@@ -216,7 +220,6 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
             }
         }
         datePickerFragment.show(supportFragmentManager, "DatePickerDialog")
-        timePickerFragment.show(supportFragmentManager, "TimePickerDialog")
     }
 
     private fun showMessage(message: String) {
@@ -227,14 +230,8 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
         ).show()
     }
 
-    private fun returnToMainFragment() {
+    private fun returnToTasksFragment() {
         (activity as? MainActivity)?.onBackPressed()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if(checkPermissions() == true)
-            getCurrentLocation()
     }
 
     override fun onDestroyView() {
