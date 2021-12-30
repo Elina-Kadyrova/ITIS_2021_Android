@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">FirstApp</string>
+    <string name="app_name">To do</string>
+    <string name="edit_task">Edit task</string>
+    <string name="title">Task title</string>
+    <string name="description">Task description</string>
+    <string name="empty_todo">Add your first task</string>
+    <string name="delete_all">Delete all</string>
+    <string name="choose_date">Choose date</string>
+    <string name="add_geolocation">Add geolocation</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="longitude">Longitude: -</string>
+    <string name="latitude">Latitude: -</string>
+    <string name="time">Task time</string>
+    <string name="save_new_task">Save new task</string>
 </resources>
