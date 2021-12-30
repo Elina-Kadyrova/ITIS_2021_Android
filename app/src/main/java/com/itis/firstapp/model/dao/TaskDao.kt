@@ -8,20 +8,20 @@ import java.util.*
 interface TaskDao {
 
     @Insert
-    fun add(task: Task)
+    suspend fun add(task: Task)
 
     @Query("SELECT * FROM task")
-    fun getAll(): List<Task>
+    suspend fun getAll(): List<Task>
 
     @Query("SELECT * FROM task WHERE id = :id")
-    fun getTaskById(id: Int): Task?
+    suspend fun getTaskById(id: Int): Task?
 
     @Update
-    fun updateTask(task: Task)
+    suspend fun updateTask(task: Task)
 
     @Query("DELETE FROM task WHERE id=:task")
-    fun deleteTask(task: Int)
+    suspend fun deleteTask(task: Int)
 
     @Query("DELETE FROM task")
-    fun deleteAll()
+    suspend fun deleteAll()
 }

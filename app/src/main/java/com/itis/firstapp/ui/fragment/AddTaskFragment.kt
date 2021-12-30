@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +20,7 @@ import com.itis.firstapp.databinding.AddTaskFragmentBinding
 import com.itis.firstapp.model.TaskDb
 import com.itis.firstapp.model.entities.Task
 import com.itis.firstapp.ui.MainActivity
+import kotlinx.coroutines.*
 import java.util.*
 
 private const val REQUEST_CODE = 1
@@ -32,6 +34,7 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
     private var currentTaskId: Int? = null
     private var longitude: Double? = null
     private var latitude: Double? = null
+    private var scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +50,7 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
             toolbar.apply {
                 setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
                 setNavigationOnClickListener {
-                    (activity as? MainActivity)?.onBackPressed()
+                    returnToTasksFragment()
                 }
                 setOnMenuItemClickListener { onOptionsItemSelected(it) }
             }
@@ -134,20 +137,22 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
     }
 
     private fun setTask(id: Int) {
-        val task = taskDb.taskDao().getTaskById(id)
-        binding?.apply {
-            etTitle.setText(task?.title)
-            etDesc.setText(task?.description)
-            task?.date?.let {
-                calendar = Calendar.getInstance()
-                calendar?.time = it
+        scope.launch {
+            val task = taskDb.taskDao().getTaskById(id)
+            binding?.apply {
+                etTitle.setText(task?.title)
+                etDesc.setText(task?.description)
+                task?.date?.let {
+                    calendar = Calendar.getInstance()
+                    calendar?.time = it
+                }
             }
         }
     }
 
     private fun saveTask() {
         currentTaskId?.let {
-            updateTask(it)
+           updateTask(it)
         }
         if (currentTaskId == null && isDataCorrect()) {
             addTask()
@@ -158,13 +163,13 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
 
     private fun updateTask(id: Int) {
         if (isDataCorrect()) {
-            updateData(id)
+            scope.launch {updateData(id)}
             showMessage("Task successfully updated.")
             returnToTasksFragment()
         }
     }
 
-    private fun updateData(id: Int) {
+    private suspend fun updateData(id: Int) {
         val task = taskDb.taskDao().getTaskById(id)
         binding?.apply {
             task?.let {
@@ -188,7 +193,9 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
                 longitude,
                 latitude
             )
-            taskDb.taskDao().add(newTask)
+            scope.launch {
+                taskDb.taskDao().add(newTask)
+            }
         }
     }
 
@@ -231,11 +238,13 @@ class AddTaskFragment : Fragment(R.layout.add_task_fragment) {
     }
 
     private fun returnToTasksFragment() {
-        (activity as? MainActivity)?.onBackPressed()
+        findNavController().popBackStack(R.id.mainFragment, true)
+        findNavController().navigate(R.id.mainFragment)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+        scope.cancel()
     }
 }

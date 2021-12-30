@@ -14,6 +14,7 @@ import com.itis.firstapp.model.TaskDb
 import com.itis.firstapp.model.entities.Task
 import com.itis.firstapp.ui.recycler_view.SpaceItemDecorator
 import com.itis.firstapp.ui.recycler_view.TaskAdapter
+import kotlinx.coroutines.*
 import java.util.*
 
 class TasksFragment : Fragment(R.layout.tasks_fragment) {
@@ -22,6 +23,7 @@ class TasksFragment : Fragment(R.layout.tasks_fragment) {
     private var taskAdapter: TaskAdapter? = null
     private lateinit var taskDb: TaskDb
     private lateinit var tasks: List<Task>
+    private var scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +44,7 @@ class TasksFragment : Fragment(R.layout.tasks_fragment) {
                 addItemDecoration(SpaceItemDecorator(context))
             }
         }
-        updateTasks()
+        scope.launch(Dispatchers.Default) { updateTasks() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -56,17 +58,18 @@ class TasksFragment : Fragment(R.layout.tasks_fragment) {
     }
 
     private fun updateTasks() {
-        tasks = taskDb.taskDao().getAll()
-        binding?.apply {
-            if (tasks.isEmpty()) {
-                emptyTasks.visibility = View.VISIBLE
-                rvTasks.visibility = View.GONE
-            } else {
-                emptyTasks.visibility = View.GONE
-                rvTasks.visibility = View.VISIBLE
+        scope.launch {  tasks = taskDb.taskDao().getAll()
+            binding?.apply {
+                if (tasks.isEmpty()) {
+                    emptyTasks.visibility = View.VISIBLE
+                    rvTasks.visibility = View.GONE
+                } else {
+                    emptyTasks.visibility = View.GONE
+                    rvTasks.visibility = View.VISIBLE
+                }
             }
-        }
-        taskAdapter?.submitList(ArrayList(tasks))
+            taskAdapter?.submitList(ArrayList(tasks)) }
+
     }
 
     private fun deleteAllTasks() {
@@ -75,8 +78,8 @@ class TasksFragment : Fragment(R.layout.tasks_fragment) {
                 .setMessage("Are you sure to delete all tasks?")
                 .setPositiveButton("Yes") {
                         dialog, _ ->
-                    taskDb.taskDao().deleteAll()
-                    updateTasks()
+                    scope.launch { taskDb.taskDao().deleteAll()
+                    updateTasks()}
                     showMessage("All tasks are removed")
                     dialog.dismiss()
                 }
@@ -92,9 +95,9 @@ class TasksFragment : Fragment(R.layout.tasks_fragment) {
     }
 
     private fun deleteTask(id: Int) {
-        taskDb.taskDao().deleteTask(id)
-        updateTasks()
-        showMessage("Task is done.")
+        scope.launch { taskDb.taskDao().deleteTask(id)
+            updateTasks()}
+            showMessage("Task is done.")
     }
 
     private fun showTaskFragment(id: Int?) {
@@ -121,6 +124,6 @@ class TasksFragment : Fragment(R.layout.tasks_fragment) {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+        scope.cancel()
     }
-
 }
