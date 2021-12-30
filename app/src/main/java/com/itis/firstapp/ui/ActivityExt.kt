@@ -1,4 +1,4 @@
-package com.itis.firstapp
+package com.itis.firstapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
